@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Aatrox",
+    "gender": "Male",
+    "position": "Top",
+    "species": "Darkin",
+    "resource": "Blood Well",
+    "range": "Melee",
+    "regions": ["Noxus", "Shurima"],
+    "release_date": "2013"
+  },
+  {
+    "name": "Ahri",
+    "gender": "Female",
+    "position": "Mid",
+    "species": "Vastaya",
+    "resource": "Mana",
+    "range": "Ranged",
+    "regions": ["Ionia"],
+    "release_date": "2011"
+  },
+  {
+    "name": "Akali",
+    "gender": "Female",
+    "position": "Mid, Top",
+    "species": "Human",
+    "resource": "Energy",
+    "range": "Melee",
+    "regions": ["Ionia"],
+    "release_date": "2010"
+  },
+  {
+    "name": "Alistar",
+    "gender": "Male",
+    "position": "Support, Top",
+    "species": "Minotaur",
+    "resource": "Mana",
+    "range": "Melee",
+    "regions": ["Freljord", "Runeterra"],
+    "release_date": "2009"
+  },
+  {
+    "name": "Amumu",
+    "gender": "Male",
+    "position": "Jungle",
+    "species": "Yordle",
+    "resource": "Mana",
+    "range": "Melee",
+    "regions": ["Shurima"],
+    "release_date": "2009"
+  },
+  {
+    "name": "Anivia",
+    "gender": "Female",
+    "position": "Mid",
+    "species": "Cryophoenix",
+    "resource": "Mana",
+    "range": "Ranged",
+    "regions": ["Freljord"],
+    "release_date": "2009"
+  },
+  {
+    "name": "Annie",
+    "gender": "Female",
+    "position": "Mid, Support",
+    "species": "Human",
+    "resource": "Mana",
+    "range": "Ranged",
+    "regions": ["Piltover"],
+    "release_date": "2009"
+  },
+  {
+    "name": "Aphelios",
+    "gender": "Male",
+    "position": "ADC",
+    "species": "Human",
+    "resource": "Ammo System",
+    "range": "Ranged",
+    "regions": ["Targon"],
+    "release_date": "2019"
+  },
+  {
+    "name": "Ashe",
+    "gender": "Female",
+    "position": "ADC",
+    "species": "Human",
+    "resource": "Mana",
+    "range": "Ranged",
+    "regions": ["Freljord"],
+    "release_date": "2009"
+  },
+  {
+    "name": "Aurelion Sol",
+    "gender": "Male",
+    "position": "Mid",
+    "species": "Dragon",
+    "resource": "Mana",
+    "range": "Ranged",
+    "regions": ["Targon"],
+    "release_date": "2016"
+  },
+  {
+    "name": "Azir",
+    "gender": "Male",
+    "position": "Mid",
+    "species": "Shuriman Ascended",
+    "resource": "Mana",
+    "range": "Ranged",
+    "regions": ["Shurima"],
+    "release_date": "2014"
+  },
+  {
+    "name": "Bard",
+    "gender": "Male",
+    "position": "Support",
+    "species": "Cosmic Caretaker",
+    "resource": "Mana",
+    "range": "Ranged",
+    "regions": ["Runeterra"],
+    "release_date": "2015"
+  }
+]

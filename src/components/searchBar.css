@@ -1,0 +1,4 @@
+.champion-list {
+    max-height: 150px; /* Adjust the maximum height as needed */
+    overflow: auto;
+}
