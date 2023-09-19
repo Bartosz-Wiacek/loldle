@@ -10,6 +10,7 @@ interface Champion {
 function SearchBar() {
     const [searchInput, setSearchInput] = useState('');
     const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
+    const [guesses, setGuesses] = useState<Champion[]>([]); // Array of champion names that the user has guessed
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
@@ -23,6 +24,11 @@ function SearchBar() {
         setFilteredChampions(filteredChamps.slice(0, 5));
     };
 
+    const handleChampionClick = (championName: string) => {
+        setSearchInput(championName); // Set the search input to the clicked champion name
+        setFilteredChampions([]); // Clear the filtered champion list
+    };
+
     return (
         <div>
             <input
@@ -34,7 +40,12 @@ function SearchBar() {
             {searchInput.length > 0 && (
                 <ul className="champion-list">
                     {filteredChampions.map((champ: Champion) => (
-                        <li key={champ.name}>{champ.name}</li>
+                        <li
+                            key={champ.name}
+                            onClick={() => handleChampionClick(champ.name)} // Add click handler
+                        >
+                            {champ.name}
+                        </li>
                     ))}
                 </ul>
             )}
