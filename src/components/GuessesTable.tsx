@@ -1,5 +1,6 @@
-import {useEffect, useState} from "react";
+import {CSSProperties, useEffect, useState} from "react";
 import data from '../../champ-data.json';
+import './guessTable.css'
 
 interface ActualChampion {
     actualChampion: string;
@@ -20,74 +21,107 @@ interface Champion {
 function GuessesTable({ guess, extraProps }: { guess: string; extraProps: ActualChampion }) {
 
     const { actualChampion } = extraProps;
+    const actualChampionData = lookupChampion(actualChampion)
 
     const [tableData, setTableData] = useState<string[]>([]);
     const [championData, setChampionData] = useState<Champion | null>(null);
+    const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
 
     function lookupChampion(championName: string) {
         return data.find((champion: any) => champion.name === championName);
     }
 
-    console.log(lookupChampion(guess));
-    console.log(tableData);
+    function setPositionColor(championPosition: string, actualChampionPosition: string | undefined): CSSProperties {
+        const defaultStyle: CSSProperties = { color: 'white' }; // Default color
+
+        if (championPosition.toString() == actualChampionPosition?.toString()) {
+            return { ...defaultStyle, color: 'green' }; // MidGuess: Orange
+        } else if (actualChampionPosition?.includes(championPosition[0])) {
+            return { ...defaultStyle, color: 'orange' }; // GoodGuess: Green
+        } else {
+            return { ...defaultStyle, color: 'red' }; // WrongGuess: Red
+        }
+    }
+
+    function setColor(championStats: any, actualChampionStats: any): CSSProperties {
+        const defaultStyle: CSSProperties = { color: 'white' }; // Default color
+
+        if (championStats.toString() == actualChampionStats?.toString()) {
+            return { ...defaultStyle, color: 'green' }; // MidGuess: Orange
+        } else if (actualChampionStats?.includes(championStats[0])) {
+            return { ...defaultStyle, color: 'orange' }; // GoodGuess: Green
+        } else {
+            return { ...defaultStyle, color: 'red' }; // WrongGuess: Red
+        }
+    }
+
+    console.log('actualChampionData')
+    console.log(actualChampionData)
+    console.log('championData')
+    console.log(championData)
+
+    console.log(championData?.position.toString() == actualChampionData?.position.toString())
 
     useEffect(() => {
         setTableData([...tableData, guess]);
         setChampionData(lookupChampion(guess) as any);
+
+        const champion = lookupChampion(guess);
+        if (champion) {
+            setGuessedChampions((prevChampions : any) => [...prevChampions, champion]);
+        }
     }, [guess]);
+
+
     return (
         <div>
-            You guessed: {guess}
-            <br />
-            <ul>
-                {tableData.map((item, index) => (
-                    <li key={index}>{item}</li>
+            <h2>Guessed Champions</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Champion</th>
+                    <th>Gender</th>
+                    <th>Position(s)</th>
+                    <th>Species</th>
+                    <th>Resource</th>
+                    <th>Range type</th>
+                    <th>Region(s)</th>
+                    <th>Release year</th>
+                </tr>
+                </thead>
+                <tbody>
+                {guessedChampions.slice().reverse().map((champion, index) => (
+                    <tr key={index}>
+                        <td className={champion.name === actualChampionData?.name ? 'goodGuess' : 'wrongGuess'}>
+                            {champion.name}
+                        </td>
+                        <td className={champion.gender == actualChampionData?.gender ? 'goodGuess' : 'wrongGuess'}>
+                            {champion.gender}
+                        </td>
+                        <td style={setColor(champion?.position, actualChampionData?.position.toString())}>
+                            {champion?.position}
+                        </td>
+                        <td style={setColor(champion?.species, actualChampionData?.species.toString())}>
+                            {champion?.species}
+                        </td>
+                        <td style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
+                            {champion?.resource}
+                        </td>
+                        <td style={setColor(champion?.range, actualChampionData?.range.toString())}>
+                            {champion?.range}
+                        </td>
+                        <td style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
+                            {champion?.regions}
+                        </td>
+                        <td className={champion.release_date == actualChampionData?.release_date ? 'goodGuess' : 'wrongGuess'}>
+                            {champion.release_date}
+                        </td>
+                    </tr>
                 ))}
-            </ul>
-
-            {championData && (
-                <div>
-                    <h2>Champion Information</h2>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>Champion:</td>
-                            <td>{championData.name}</td>
-                        </tr>
-                        <tr>
-                            <td>Gender:</td>
-                            <td>{championData.gender}</td>
-                        </tr>
-                        <tr>
-                            <td>Position(s):</td>
-                            <td>{championData.position}</td>
-                        </tr>
-                        <tr>
-                            <td>Species:</td>
-                            <td>{championData.species}</td>
-                        </tr>
-                        <tr>
-                            <td>Resource:</td>
-                            <td>{championData.resource}</td>
-                        </tr>
-                        <tr>
-                            <td>Range type:</td>
-                            <td>{championData.range}</td>
-                        </tr>
-                        <tr>
-                            <td>Region(s):</td>
-                            <td>{championData.regions}</td>
-                        </tr>
-                        <tr>
-                            <td>Release year:</td>
-                            <td>{championData.release_date}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            )}
-
+                </tbody>
+            </table>
         </div>
+
     );
 }
 
