@@ -1,6 +1,7 @@
 import {CSSProperties, useEffect, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 
 interface ActualChampion {
     actualChampion: string;
@@ -29,18 +30,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
 
     function lookupChampion(championName: string) {
         return data.find((champion: any) => champion.name === championName);
-    }
-
-    function setPositionColor(championPosition: string, actualChampionPosition: string | undefined): CSSProperties {
-        const defaultStyle: CSSProperties = { color: 'white' }; // Default color
-
-        if (championPosition.toString() == actualChampionPosition?.toString()) {
-            return { ...defaultStyle, color: 'green' }; // MidGuess: Orange
-        } else if (actualChampionPosition?.includes(championPosition[0])) {
-            return { ...defaultStyle, color: 'orange' }; // GoodGuess: Green
-        } else {
-            return { ...defaultStyle, color: 'red' }; // WrongGuess: Red
-        }
     }
 
     function setColor(championStats: any, actualChampionStats: any): CSSProperties {
@@ -72,10 +61,9 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
         }
     }, [guess]);
 
-
     return (
         <div>
-            <h2>Guessed Champions</h2>
+            <h2>Guessed Champions </h2>
             <table>
                 <thead>
                 <tr>
@@ -113,8 +101,9 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                         <td style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
                             {champion?.regions}
                         </td>
-                        <td className={champion.release_date == actualChampionData?.release_date ? 'goodGuess' : 'wrongGuess'}>
+                        <td className={champion.release_date == parseInt(actualChampionData?.release_date as string)  ? 'goodGuess' : 'wrongGuess'}>
                             {champion.release_date}
+                            {champion.release_date > parseInt(actualChampionData?.release_date as string) ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
                         </td>
                     </tr>
                 ))}
