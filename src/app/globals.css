@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+.container {
   background-image: url('../../public/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+
 
   font-family: 'Roboto', sans-serif;
     font-weight: 400;

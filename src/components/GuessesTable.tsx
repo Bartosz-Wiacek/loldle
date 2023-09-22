@@ -48,9 +48,9 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             return null;
         }
         else if (year > parseInt(actualChampionData?.release_date as string)) {
-            return <AiOutlineArrowDown style={{ background: 'red'}} />
+            return <AiOutlineArrowDown style={{ color: 'red'}} />
         } else {
-            return <AiOutlineArrowUp style={{ background: 'red'}} />
+            return <AiOutlineArrowUp style={{ color: 'red'}} />
         }
     }
 

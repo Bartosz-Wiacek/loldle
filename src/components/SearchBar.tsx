@@ -39,7 +39,10 @@ function SearchBar() {
 
 
     return (
-        <div>
+        <div className="container">
+            <div className="logo">
+                <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
+            </div>
             <input
                 type="text"
                 placeholder="Search here"
