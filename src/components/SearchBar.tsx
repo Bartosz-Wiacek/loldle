@@ -28,6 +28,9 @@ function SearchBar() {
         setSearchInput(championName); // Set the search input to the clicked champion name
         setFilteredChampions([]); // Clear the filtered champion list
         setGuesses(championName);
+        if (championName === actualChampion) {
+            alert("Correct!");
+        }
     };
 
     useEffect(() => {
