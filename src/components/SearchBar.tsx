@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import data from '../../champ-data.json';
 import './searchBar.css';
+import GuessesTable from "@/components/GuessesTable";
 
 interface Champion {
     name: string;
@@ -10,13 +11,12 @@ interface Champion {
 function SearchBar() {
     const [searchInput, setSearchInput] = useState('');
     const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
-    const [guesses, setGuesses] = useState<Champion[]>([]); // Array of champion names that the user has guessed
+    const [guesses, setGuesses] = useState<string>("");
+    const [actualChampion, setActualChampion] = useState<string>("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
         setSearchInput(inputValue);
-
-        // Filter the champions based on the input value
         const filteredChamps = data.filter((champ: Champion) =>
             champ.name.toLowerCase().includes(inputValue.toLowerCase())
         );
@@ -27,7 +27,16 @@ function SearchBar() {
     const handleChampionClick = (championName: string) => {
         setSearchInput(championName); // Set the search input to the clicked champion name
         setFilteredChampions([]); // Clear the filtered champion list
+        setGuesses(championName);
+        if (championName === actualChampion) {
+            alert("Correct!");
+        }
     };
+
+    useEffect(() => {
+        setActualChampion(data[Math.floor(Math.random() * data.length)].name);
+    }, []);
+
 
     return (
         <div>
@@ -49,6 +58,7 @@ function SearchBar() {
                     ))}
                 </ul>
             )}
+            <GuessesTable guess={guesses} extraProps={{ actualChampion: actualChampion }} />
         </div>
     );
 }

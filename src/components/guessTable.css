@@ -1,0 +1,11 @@
+.goodGuess {
+    color: green;
+}
+
+.wrongGuess {
+    color: red;
+}
+
+.midGuess {
+    color: orange;
+}
