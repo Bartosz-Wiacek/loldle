@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import data from '../../champ-data.json';
 import './searchBar.css';
 import GuessesTable from "@/components/GuessesTable";
+import Image from "next/image";
 
 interface Champion {
     name: string;
@@ -43,11 +44,17 @@ function SearchBar() {
             <div className="logo">
                 <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
             </div>
+            <div className="text-container">
+                <h1>Guess today's League of Legends champion!</h1>
+                <h2>Type any champion to begin.</h2>
+            </div>
+
             <input
                 type="text"
-                placeholder="Search here"
+                placeholder="Type champion name..."
                 onChange={handleChange}
                 value={searchInput}
+                className="search-input"
             />
             {searchInput.length > 0 && (
                 <ul className="champion-list">
@@ -61,6 +68,10 @@ function SearchBar() {
                     ))}
                 </ul>
             )}
+            <button>
+                <Image src={"/button-logo.png"} alt={"test"} width={100} height={100}/>
+                {/*//FIX THIS AND CHANGE SRC*/}
+            </button>
             <GuessesTable guess={guesses} extraProps={{ actualChampion: actualChampion }} />
         </div>
     );
