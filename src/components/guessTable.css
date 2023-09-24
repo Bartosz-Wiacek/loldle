@@ -9,3 +9,24 @@
 .midGuess {
     color: orange;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 8px;
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    width: 40%;
+}
+
+.first-row {
+    border-bottom: 10px dashed white;
+}

@@ -1,3 +1,4 @@
+"use client"; // delete after resolving issue with not being in the center
 import {CSSProperties, useEffect, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
@@ -19,7 +20,7 @@ interface Champion {
 }
 
 
-function GuessesTable({ guess, extraProps }: { guess: string; extraProps: ActualChampion }) {
+function GuessesTable({ guess, extraProps }: { guess: string; extraProps: ActualChampion}) {
 
     const { actualChampion } = extraProps;
     const actualChampionData = lookupChampion(actualChampion)
@@ -81,21 +82,21 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }, [guess]);
 
     return (
-        <div>
-            <h2>Guessed Champions </h2>
+        <div className="table">
             <table>
-                <thead>
-                <tr>
-                    <th>Champion</th>
-                    <th>Gender</th>
-                    <th>Position(s)</th>
-                    <th>Species</th>
-                    <th>Resource</th>
-                    <th>Range type</th>
-                    <th>Region(s)</th>
-                    <th>Release year</th>
-                </tr>
-                </thead>
+                    <thead className="first-row">
+                    <tr>
+                        <th>Champion</th>
+                        <th>Gender</th>
+                        <th>Position(s)</th>
+                        <th>Species</th>
+                        <th>Resource</th>
+                        <th>Range type</th>
+                        <th>Region(s)</th>
+                        <th>Release year</th>
+                    </tr>
+                    </thead>
+
                 <tbody>
                 {guessedChampions.slice().reverse().map((champion, index) => (
                     <tr key={index}>
