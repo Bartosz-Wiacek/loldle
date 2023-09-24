@@ -22,7 +22,7 @@ function SearchBar() {
             champ.name.toLowerCase().includes(inputValue.toLowerCase())
         );
 
-        setFilteredChampions(filteredChamps.slice(0, 5));
+        setFilteredChampions(filteredChamps.slice(0, 11));
     };
 
     const handleChampionClick = (championName: string) => {
@@ -49,29 +49,33 @@ function SearchBar() {
                 <h2>Type any champion to begin.</h2>
             </div>
 
-            <input
-                type="text"
-                placeholder="Type champion name..."
-                onChange={handleChange}
-                value={searchInput}
-                className="search-input"
-            />
-            {searchInput.length > 0 && (
-                <ul className="champion-list">
-                    {filteredChampions.map((champ: Champion) => (
-                        <li
-                            key={champ.name}
-                            onClick={() => handleChampionClick(champ.name)} // Add click handler
-                        >
-                            {champ.name}
-                        </li>
-                    ))}
-                </ul>
-            )}
-            <button>
-                <Image src={"/button-logo.png"} alt={"test"} width={100} height={100}/>
-                {/*//FIX THIS AND CHANGE SRC*/}
-            </button>
+            <div className="submit-container">
+                <input
+                    type="text"
+                    placeholder="Type champion name..."
+                    onChange={handleChange}
+                    value={searchInput}
+                    className="search-input"
+                />
+                <button>
+                    <Image src={"/button-submit.png"} alt={"test"} width={80} height={80}/>
+                </button>
+            </div>
+            <div className="output-searchbar">
+                {searchInput.length > 0 && (
+                    <ul className="champion-list">
+                        {filteredChampions.map((champ: Champion) => (
+                            <li
+                                key={champ.name}
+                                onClick={() => handleChampionClick(champ.name)} // Add click handler
+                            >
+                                {champ.name}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
             <GuessesTable guess={guesses} extraProps={{ actualChampion: actualChampion }} />
         </div>
     );
