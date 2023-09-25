@@ -1,11 +1,42 @@
 .goodGuess {
-    color: green;
+    background-color: green;
 }
 
 .wrongGuess {
-    color: red;
+    background-color: red;
 }
 
 .midGuess {
-    color: orange;
+    background-color: orange;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 8px;
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    width: 40%;
+}
+
+.line {
+    padding-top: 15px;
+    border-bottom: 3px solid white;
+}
+
+.guessed-champions td {
+/*TODO: make this being separated*/
+    border: 1px white solid;
+    border-collapse: separate;
+    border-spacing: 10px;
+    margin: 10px;
+}
+

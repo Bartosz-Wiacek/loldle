@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import data from '../../champ-data.json';
 import './searchBar.css';
 import GuessesTable from "@/components/GuessesTable";
+import Image from "next/image";
 
 interface Champion {
     name: string;
@@ -21,7 +22,7 @@ function SearchBar() {
             champ.name.toLowerCase().includes(inputValue.toLowerCase())
         );
 
-        setFilteredChampions(filteredChamps.slice(0, 5));
+        setFilteredChampions(filteredChamps.slice(0, 11));
     };
 
     const handleChampionClick = (championName: string) => {
@@ -39,25 +40,42 @@ function SearchBar() {
 
 
     return (
-        <div>
-            <input
-                type="text"
-                placeholder="Search here"
-                onChange={handleChange}
-                value={searchInput}
-            />
-            {searchInput.length > 0 && (
-                <ul className="champion-list">
-                    {filteredChampions.map((champ: Champion) => (
-                        <li
-                            key={champ.name}
-                            onClick={() => handleChampionClick(champ.name)} // Add click handler
-                        >
-                            {champ.name}
-                        </li>
-                    ))}
-                </ul>
-            )}
+        <div className="container">
+            <div className="logo">
+                <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
+            </div>
+            <div className="text-container">
+                <h1>Guess today's League of Legends champion!</h1>
+                <h2>Type any champion to begin.</h2>
+            </div>
+
+            <div className="submit-container">
+                <input
+                    type="text"
+                    placeholder="Type champion name..."
+                    onChange={handleChange}
+                    value={searchInput}
+                    className="search-input"
+                />
+                <button>
+                    <Image src={"/button-submit.png"} alt={"test"} width={80} height={80}/>
+                </button>
+            </div>
+            <div className="output-searchbar">
+                {searchInput.length > 0 && (
+                    <ul className="champion-list">
+                        {filteredChampions.map((champ: Champion) => (
+                            <li
+                                key={champ.name}
+                                onClick={() => handleChampionClick(champ.name)} // Add click handler
+                            >
+                                {champ.name}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
             <GuessesTable guess={guesses} extraProps={{ actualChampion: actualChampion }} />
         </div>
     );

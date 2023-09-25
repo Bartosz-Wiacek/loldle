@@ -1,3 +1,4 @@
+"use client"; // delete after resolving issue with not being in the center
 import {CSSProperties, useEffect, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
@@ -19,7 +20,7 @@ interface Champion {
 }
 
 
-function GuessesTable({ guess, extraProps }: { guess: string; extraProps: ActualChampion }) {
+function GuessesTable({ guess, extraProps }: { guess: string; extraProps: ActualChampion}) {
 
     const { actualChampion } = extraProps;
     const actualChampionData = lookupChampion(actualChampion)
@@ -35,11 +36,11 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     function setColor(championStats: any, actualChampionStats: any): CSSProperties {
         const defaultStyle: CSSProperties = { color: 'white' };
         if (championStats.toString() == actualChampionStats?.toString()) {
-            return { ...defaultStyle, color: 'green' }; // MidGuess: Orange
+            return { ...defaultStyle, backgroundColor: 'green' }; // MidGuess: Orange
         } else if (actualChampionStats?.includes(championStats[0])) {
-            return { ...defaultStyle, color: 'orange' }; // GoodGuess: Green
+            return { ...defaultStyle, backgroundColor: 'orange' }; // GoodGuess: Green
         } else {
-            return { ...defaultStyle, color: 'red' }; // WrongGuess: Red
+            return { ...defaultStyle, backgroundColor: 'red' }; // WrongGuess: Red
         }
     }
 
@@ -48,9 +49,9 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             return null;
         }
         else if (year > parseInt(actualChampionData?.release_date as string)) {
-            return <AiOutlineArrowDown style={{ background: 'red'}} />
+            return <AiOutlineArrowDown />
         } else {
-            return <AiOutlineArrowUp style={{ background: 'red'}} />
+            return <AiOutlineArrowUp />
         }
     }
 
@@ -81,24 +82,24 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }, [guess]);
 
     return (
-        <div>
-            <h2>Guessed Champions </h2>
+        <div className="table">
             <table>
-                <thead>
-                <tr>
-                    <th>Champion</th>
-                    <th>Gender</th>
-                    <th>Position(s)</th>
-                    <th>Species</th>
-                    <th>Resource</th>
-                    <th>Range type</th>
-                    <th>Region(s)</th>
-                    <th>Release year</th>
-                </tr>
-                </thead>
-                <tbody>
+                    <thead>
+                    <tr>
+                        <th>Champion <div className="line"> </div></th>
+                        <th>Gender <div className="line"> </div></th>
+                        <th>Position(s) <div className="line"> </div></th>
+                        <th>Species <div className="line"> </div></th>
+                        <th>Resource <div className="line"> </div></th>
+                        <th>Range type <div className="line"> </div></th>
+                        <th>Region(s) <div className="line"> </div></th>
+                        <th>Release year <div className="line"> </div></th>
+                    </tr>
+                    </thead>
+
+                <tbody className="guessed-champions">
                 {guessedChampions.slice().reverse().map((champion, index) => (
-                    <tr key={index}>
+                    <tr key={index} >
                         <td className={champion.name === actualChampionData?.name ? 'goodGuess' : 'wrongGuess'}>
                             {champion.name}
                         </td>
