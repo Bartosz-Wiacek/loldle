@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
         <SearchBar />
-        <GuessesTable guess="Aatrox" extraProps={{ actualChampion: "SomeChampionName" }} />
+        {/*<GuessesTable guess="Aatrox" extraProps={{ actualChampion: "SomeChampionName" }} />*/}
     </>
   )
 }
