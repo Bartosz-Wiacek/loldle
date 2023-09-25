@@ -14,6 +14,7 @@ function SearchBar() {
     const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
     const [guesses, setGuesses] = useState<string>("");
     const [actualChampion, setActualChampion] = useState<string>("");
+    const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
@@ -25,12 +26,41 @@ function SearchBar() {
         setFilteredChampions(filteredChamps.slice(0, 11));
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.keyCode === 13 && filteredChampions.length > 0) { // Check if Enter key is pressed and there are filtered champions
+            const firstChampion = filteredChampions[0].name;
+            setSearchInput(firstChampion);
+            setFilteredChampions([]);
+            setGuesses(firstChampion);
+            setSearchInput("");
+            if (firstChampion === actualChampion) {
+                alert("Correct!");
+                setIsDisabled(true);
+            }
+        }
+    };
+
     const handleChampionClick = (championName: string) => {
         setSearchInput(championName); // Set the search input to the clicked champion name
         setFilteredChampions([]); // Clear the filtered champion list
         setGuesses(championName);
+        setSearchInput("");
         if (championName === actualChampion) {
             alert("Correct!");
+        }
+    };
+
+    const handleButtonClick = () => {
+        const championName = searchInput.trim().toLowerCase(); // Get the search input and convert to lowercase
+        const champion = data.find((champ: Champion) => champ.name.toLowerCase() === championName); // Find the champion with matching name
+
+        if (champion) { // If a matching champion is found
+            setGuesses(champion.name);
+            setSearchInput("");
+            if (champion.name === actualChampion) {
+                alert("Correct!");
+                setIsDisabled(true);
+            }
         }
     };
 
@@ -54,10 +84,12 @@ function SearchBar() {
                     type="text"
                     placeholder="Type champion name..."
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                     value={searchInput}
                     className="search-input"
+                    disabled={isDisabled}
                 />
-                <button>
+                <button onClick={handleButtonClick} disabled={isDisabled}>
                     <Image src={"/button-submit.png"} alt={"test"} width={80} height={80}/>
                 </button>
             </div>

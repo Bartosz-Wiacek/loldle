@@ -1,5 +1,5 @@
 "use client"; // delete after resolving issue with not being in the center
-import {CSSProperties, useEffect, useState} from "react";
+import React, {CSSProperties, useEffect, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
@@ -100,26 +100,27 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                 <tbody className="guessed-champions">
                 {guessedChampions.slice().reverse().map((champion, index) => (
                     <tr key={index} >
-                        <td className={champion.name === actualChampionData?.name ? 'goodGuess' : 'wrongGuess'}>
-                            {champion.name}
+                        <td style={{ position: "relative" }}>
+                            <img className="champion-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/\s+/g, '')}.png`} />
+                            <div className="champion-name">{champion.name}</div>
                         </td>
                         <td className={champion.gender == actualChampionData?.gender ? 'goodGuess' : 'wrongGuess'}>
                             {champion.gender}
                         </td>
                         <td style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
-                            {champion?.position}
+                            {champion?.position.toString().split(/(?=[A-Z])/).join(' ')}
                         </td>
                         <td style={setColor(champion?.species, actualChampionData?.species.toString())}>
-                            {champion?.species}
+                            {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
                         </td>
                         <td style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
                             {champion?.resource}
                         </td>
                         <td style={setColor(champion?.range, actualChampionData?.range.toString())}>
-                            {champion?.range}
+                            {champion?.range.toString().split(/(?=[A-Z])/).join(' ')}
                         </td>
                         <td style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
-                            {champion?.regions}
+                            {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
                         </td>
                         <td className={champion.release_date == parseInt(actualChampionData?.release_date as string)  ? 'goodGuess' : 'wrongGuess'}>
                             {champion.release_date}
