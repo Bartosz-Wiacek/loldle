@@ -24,7 +24,7 @@ table th, table td {
     align-items: center;
     text-align: center;
     margin: 0 auto;
-    width: 40%;
+    width: 50%;
 }
 
 .line {
@@ -40,8 +40,8 @@ table th, table td {
     margin: 10px;
 }
 
-.champion-image {
-    width: 80%;
+.champ-image {
+    width: 80% !important;
     object-fit: cover;
 }
 

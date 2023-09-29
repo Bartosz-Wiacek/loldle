@@ -47,6 +47,7 @@ function SearchBar() {
         setSearchInput("");
         if (championName === actualChampion) {
             alert("Correct!");
+            setIsDisabled(true);
         }
     };
 
@@ -57,10 +58,6 @@ function SearchBar() {
         if (champion) { // If a matching champion is found
             setGuesses(champion.name);
             setSearchInput("");
-            if (champion.name === actualChampion) {
-                alert("Correct!");
-                setIsDisabled(true);
-            }
         }
     };
 
@@ -75,7 +72,7 @@ function SearchBar() {
                 <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
             </div>
             <div className="text-container">
-                <h1>Guess today's League of Legends champion!</h1>
+                <h1>Guess todays League of Legends champion!</h1>
                 <h2>Type any champion to begin.</h2>
             </div>
 
@@ -95,16 +92,19 @@ function SearchBar() {
             </div>
             <div className="output-searchbar">
                 {searchInput.length > 0 && (
-                    <ul className="champion-list">
+                    <div className="champion-list">
                         {filteredChampions.map((champ: Champion) => (
-                            <li
+                            <div
                                 key={champ.name}
                                 onClick={() => handleChampionClick(champ.name)} // Add click handler
                             >
+                                <div className="champion-container">
+                                    <img className="champion-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
                                 {champ.name}
-                            </li>
+                                </div>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 )}
             </div>
 

@@ -6,7 +6,8 @@
 }
 
 .champion-list {
-    max-height: 150px; /* Adjust the maximum height as needed */
+    max-height: 345px; /* Adjust the maximum height as needed */
+    width: 100%;
     overflow: auto;
 }
 
@@ -76,12 +77,23 @@
 }
 
 .output-searchbar {
-    font-size: 17px;
+    font-size: 19px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin: 0 auto;
     width: 20%;
     height: 20%;
     background-color: #1E2328;
+}
+
+.champion-image {
+    display: flex;
+    width: 20% !important;
+    margin-right: 10px;
+}
+
+.champion-container {
+    display: flex;
+    align-items: center;
 }

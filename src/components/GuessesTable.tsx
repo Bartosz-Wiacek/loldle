@@ -101,7 +101,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                 {guessedChampions.slice().reverse().map((champion, index) => (
                     <tr key={index} >
                         <td style={{ position: "relative" }}>
-                            <img className="champion-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/\s+/g, '')}.png`} />
+                            <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
                             <div className="champion-name">{champion.name}</div>
                         </td>
                         <td className={champion.gender == actualChampionData?.gender ? 'goodGuess' : 'wrongGuess'}>
