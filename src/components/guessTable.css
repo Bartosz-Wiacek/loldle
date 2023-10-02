@@ -65,3 +65,14 @@ table th, table td {
     display: block;
 }
 
+.table2 {
+    display: flex;
+    justify-content: center;
+}
+
+.table2-header {
+    border-bottom: white 3px solid;
+    padding-bottom: 12px;
+    margin: 5px;
+}
+

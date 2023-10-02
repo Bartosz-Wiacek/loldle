@@ -82,8 +82,9 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }, [guess]);
 
     return (
-        <div className="table">
-            <table>
+        <div>
+            <div className="table">
+                <table>
                     <thead>
                     <tr>
                         <th>Champion <div className="line"> </div></th>
@@ -97,40 +98,69 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                     </tr>
                     </thead>
 
-                <tbody className="guessed-champions">
-                {guessedChampions.slice().reverse().map((champion, index) => (
-                    <tr key={index} >
-                        <td style={{ position: "relative" }}>
-                            <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
-                            <div className="champion-name">{champion.name}</div>
-                        </td>
-                        <td className={champion.gender == actualChampionData?.gender ? 'goodGuess' : 'wrongGuess'}>
-                            {champion.gender}
-                        </td>
-                        <td style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
-                            {champion?.position.toString().split(/(?=[A-Z])/).join(' ')}
-                        </td>
-                        <td style={setColor(champion?.species, actualChampionData?.species.toString())}>
-                            {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
-                        </td>
-                        <td style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
-                            {champion?.resource}
-                        </td>
-                        <td style={setColor(champion?.range, actualChampionData?.range.toString())}>
-                            {champion?.range.toString().split(/(?=[A-Z])/).join(' ')}
-                        </td>
-                        <td style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
-                            {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
-                        </td>
-                        <td className={champion.release_date == parseInt(actualChampionData?.release_date as string)  ? 'goodGuess' : 'wrongGuess'}>
-                            {champion.release_date}
-                            {setArrow(champion.release_date)}
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
-        </div>
+                    <tbody className="guessed-champions">
+                    {guessedChampions.slice().reverse().map((champion, index) => (
+                        <tr key={index} >
+                            <td style={{ position: "relative" }}>
+                                <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
+                                <div className="champion-name">{champion.name}</div>
+                            </td>
+                            <td className={champion.gender == actualChampionData?.gender ? 'goodGuess' : 'wrongGuess'}>
+                                {champion.gender}
+                            </td>
+                            <td style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
+                                {champion?.position.toString().split(/(?=[A-Z])/).join(' ')}
+                            </td>
+                            <td style={setColor(champion?.species, actualChampionData?.species.toString())}>
+                                {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
+                            </td>
+                            <td style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
+                                {champion?.resource}
+                            </td>
+                            <td style={setColor(champion?.range, actualChampionData?.range.toString())}>
+                                {champion?.range.toString().split(/(?=[A-Z])/).join(' ')}
+                            </td>
+                            <td style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
+                                {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
+                            </td>
+                            <td className={champion.release_date == parseInt(actualChampionData?.release_date as string)  ? 'goodGuess' : 'wrongGuess'}>
+                                {champion.release_date}
+                                {setArrow(champion.release_date)}
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+            <div className="table2">
+                <div className="table2-header">
+                    Champion
+                </div>
+                <div className="table2-header">
+                    Gender
+                </div>
+                <div className="table2-header">
+                    Position(s)
+                </div>
+                <div className="table2-header">
+                    Species
+                </div>
+                <div className="table2-header">
+                    Resource
+                </div>
+                <div className="table2-header">
+                    Range type
+                </div>
+                <div className="table2-header">
+                    Region(s)
+                </div>
+                <div className="table2-header">
+                    Release year
+                </div>
+
+            </div>
+            </div>
+
 
     );
 }

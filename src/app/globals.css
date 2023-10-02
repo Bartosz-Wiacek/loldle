@@ -3,8 +3,15 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Regural';
-  src: url('../../public/font.ttf') format('ttf')
+  font-family: 'Friz Quadrata TT';
+  src: url('../../public/font.otf') format('otf')
+}
+
+* {
+  /*Find better solution*/
+  overflow-x: hidden;
+  font-family: 'Friz Quadrata TT';
+  color: aliceblue;
 }
 
 .container {
@@ -15,10 +22,6 @@
   min-height: 100vh;
   min-width: 100vw;
   background-position: center center;
-
-
-  font-family: 'Regural';
-  color: aliceblue;
 }
 
 
