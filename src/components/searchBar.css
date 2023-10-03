@@ -14,15 +14,15 @@
 .logo {
     display: flex;
     justify-content: center;
+    transition: transform .2s;
 }
 
 .logo img {
     width: 25%;
     height: 25%;
-    transition: transform .2s;
 }
 
-.logo img:hover {
+.logo:hover {
     transform: scale(1.05);
 }
 

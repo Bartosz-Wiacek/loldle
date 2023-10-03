@@ -17,27 +17,31 @@
 .champ-image {
     width: 67px !important;
     object-fit: cover;
-    margin: 8px 0px 0px 0px;
+    border: #9A999A 1.8px solid;
+}
+
+.table2-output-champion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .champion-name {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    text-align: center;
-    font-size: 14px;
     font-weight: bold;
     padding: 5px;
-    border-radius: 5px;
+    text-shadow: 2px 2px #000;
+    background-color: #0a414e;
+    border: 1px solid #fff;
+    font-size: 80%;
     z-index: 1;
     display: none;
 }
 
-.champion-image:hover + .champion-name {
-    display: block;
+.champ-image:hover + .champion-name {
+    display: flex;
 }
 
 .table2 {
