@@ -36,22 +36,22 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     function setColor(championStats: any, actualChampionStats: any): CSSProperties {
         const defaultStyle: CSSProperties = { color: 'white' };
         if (championStats.toString() == actualChampionStats?.toString()) {
-            return { ...defaultStyle, backgroundColor: 'green' }; // MidGuess: Orange
+            return { ...defaultStyle, backgroundColor: '#0BC22F' }; // MidGuess: Orange
         } else if (actualChampionStats?.includes(championStats[0])) {
-            return { ...defaultStyle, backgroundColor: 'orange' }; // GoodGuess: Green
+            return { ...defaultStyle, backgroundColor: '#DD830D' }; // GoodGuess: Green
         } else {
-            return { ...defaultStyle, backgroundColor: 'red' }; // WrongGuess: Red
+            return { ...defaultStyle, backgroundColor: '#DA150F' }; // WrongGuess: Red
         }
     }
 
     function setArrow(year: number) {
         if (year == parseInt(actualChampionData?.release_date as string)) {
-            return null;
+            return "goodGuess";
         }
         else if (year > parseInt(actualChampionData?.release_date as string)) {
-            return <AiOutlineArrowDown />
+            return "wrongGuessDown";
         } else {
-            return <AiOutlineArrowUp />
+            return "wrongGuessUp";
         }
     }
 
@@ -83,56 +83,9 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
 
     return (
         <div>
-            <div className="table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Champion <div className="line"> </div></th>
-                        <th>Gender <div className="line"> </div></th>
-                        <th>Position(s) <div className="line"> </div></th>
-                        <th>Species <div className="line"> </div></th>
-                        <th>Resource <div className="line"> </div></th>
-                        <th>Range type <div className="line"> </div></th>
-                        <th>Region(s) <div className="line"> </div></th>
-                        <th>Release year <div className="line"> </div></th>
-                    </tr>
-                    </thead>
-
-                    <tbody className="guessed-champions">
-                    {guessedChampions.slice().reverse().map((champion, index) => (
-                        <tr key={index} >
-                            <td style={{ position: "relative" }}>
-                                <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
-                                <div className="champion-name">{champion.name}</div>
-                            </td>
-                            <td className={champion.gender == actualChampionData?.gender ? 'goodGuess' : 'wrongGuess'}>
-                                {champion.gender}
-                            </td>
-                            <td style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
-                                {champion?.position.toString().split(/(?=[A-Z])/).join(' ')}
-                            </td>
-                            <td style={setColor(champion?.species, actualChampionData?.species.toString())}>
-                                {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
-                            </td>
-                            <td style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
-                                {champion?.resource}
-                            </td>
-                            <td style={setColor(champion?.range, actualChampionData?.range.toString())}>
-                                {champion?.range.toString().split(/(?=[A-Z])/).join(' ')}
-                            </td>
-                            <td style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
-                                {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
-                            </td>
-                            <td className={champion.release_date == parseInt(actualChampionData?.release_date as string)  ? 'goodGuess' : 'wrongGuess'}>
-                                {champion.release_date}
-                                {setArrow(champion.release_date)}
-                            </td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
             <div className="table2">
+                {/*Header*/}
+                <div className="table2-head-wraper">
                 <div className="table2-header">
                     Champion
                 </div>
@@ -157,7 +110,37 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                 <div className="table2-header">
                     Release year
                 </div>
-
+                    </div>
+                {/*Output*/}
+                {guessedChampions.slice().reverse().map((champion, index) => (
+                <div key={index} className="table2-output">
+                    <div className="table2-output-champion">
+                        <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
+                        <div className={"champion-name"}>{champion.name}</div>
+                    </div>
+                    <div className={"table-cell"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}>
+                        {champion.gender}
+                    </div>
+                    <div className={"table-cell"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
+                        {champion?.position.toString().split(/(?=[A-Z])/).join(' ')}
+                    </div>
+                    <div className={"table-cell"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
+                        {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
+                    </div>
+                    <div className={"table-cell"} style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
+                        {champion?.resource}
+                    </div>
+                    <div className={"table-cell"} style={setColor(champion?.range, actualChampionData?.range.toString())}>
+                        {champion?.range.toString().split(/(?=[A-Z])/).join(' ')}
+                    </div>
+                    <div className={"table-cell"} style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
+                        {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
+                    </div>
+                    <div className={setArrow(champion.release_date) as string}>
+                        {champion.release_date}
+                    </div>
+                </div>
+                ))}
             </div>
             </div>
 

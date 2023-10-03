@@ -1,48 +1,23 @@
 .goodGuess {
-    background-color: green;
+    background-color: #0BC22F;
 }
 
-.wrongGuess {
-    background-color: red;
+.wrongGuessDown {
+    background-image: url('../../public/arrowDown.png');
+    background-size: cover;
+    background-position: center center;
 }
 
-.midGuess {
-    background-color: orange;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-table th, table td {
-    padding: 8px;
-}
-
-.table {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 0 auto;
-    width: 50%;
-}
-
-.line {
-    padding-top: 15px;
-    border-bottom: 3px solid white;
-}
-
-.guessed-champions td {
-/*TODO: make this being separated*/
-    border: 1px white solid;
-    border-collapse: separate;
-    border-spacing: 10px;
-    margin: 10px;
+.wrongGuessUp {
+    background-image: url('../../public/arrowUp.png');
+    background-size: cover;
+    background-position: center center;
 }
 
 .champ-image {
-    width: 80% !important;
+    width: 67px !important;
     object-fit: cover;
+    margin: 8px 0px 0px 0px;
 }
 
 .champion-name {
@@ -68,11 +43,46 @@ table th, table td {
 .table2 {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .table2-header {
+    font-size: 14.4px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 67px;
     border-bottom: white 3px solid;
-    padding-bottom: 12px;
-    margin: 5px;
+    padding-bottom: 2px;
+    margin: 3px;
+}
+
+.table2-head-wraper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.table2-output {
+    display: flex;
+    flex-direction: row;
+}
+
+.table-cell, .goodGuess, .wrongGuessDown, .wrongGuessUp {
+    font-size: 14px;
+    width: 67px;
+    height: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 8px 0px 10px 5px;
+    border: 1.8px #9A999A solid;
+}
+
+.table-cell:hover, .goodGuess:hover, .wrongGuessDown:hover, .wrongGuessUp:hover, .midGuess:hover {
+    filter: brightness(80%);
 }
 
