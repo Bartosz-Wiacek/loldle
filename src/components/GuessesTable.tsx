@@ -2,7 +2,6 @@
 import React, {CSSProperties, useEffect, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
-import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 
 interface ActualChampion {
     actualChampion: string;
@@ -55,7 +54,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
         }
     }
 
-    function comparePositions(championPosition: any) { // TODO: Fix this function
+    function comparePositions(championPosition: any) { // TODO: Fix this function or maybe it will fix itself when we get new json data
         const defaultStyle: CSSProperties = { color: 'white' };
         if ((championPosition[0] == (actualChampionData?.position[0]) || actualChampionData?.position[1]) &&
         (championPosition[1] == (actualChampionData?.position[0]) || actualChampionData?.position[1])) {
@@ -69,8 +68,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
 
     console.log('actualChampionData')
     console.log(actualChampionData)
-    console.log('championData')
-    console.log(championData)
 
     useEffect(() => {
         setTableData([...tableData, guess]);
