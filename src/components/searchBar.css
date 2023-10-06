@@ -6,7 +6,7 @@
 }
 
 .champion-list {
-    max-height: 345px; /* Adjust the maximum height as needed */
+    max-height: 260px; /* Adjust the maximum height as needed */
     width: 100%;
     overflow: auto;
 }
@@ -88,11 +88,27 @@
 
 .champion-image {
     display: flex;
-    width: 20% !important;
-    margin-right: 10px;
+    width: 38px !important;
+    margin: 10px;
 }
 
 .champion-container {
     display: flex;
     align-items: center;
+}
+
+.champion-list::-webkit-scrollbar {
+    width: 20px;
+}
+
+.champion-list::-webkit-scrollbar-track {
+    background-color: #424242;
+}
+
+.champion-list::-webkit-scrollbar-thumb {
+    background-color: #888888;
+}
+
+.champion-list::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
 }
