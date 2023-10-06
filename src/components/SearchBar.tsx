@@ -15,11 +15,12 @@ function SearchBar() {
     const [guesses, setGuesses] = useState<string>("");
     const [actualChampion, setActualChampion] = useState<string>("");
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
+    const [dataCopy, setDataCopy] = useState(Array.from(Object.values(data)));
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
         setSearchInput(inputValue);
-        const filteredChamps = data.filter((champ: Champion) =>
+        const filteredChamps = dataCopy.filter((champ: Champion) =>
             champ.name.toLowerCase().includes(inputValue.toLowerCase())
         );
 
@@ -37,8 +38,14 @@ function SearchBar() {
                 alert("Correct!");
                 setIsDisabled(true);
             }
+            dataCopy.splice(findIndex(firstChampion), 1);
+            setDataCopy(dataCopy);
         }
     };
+
+    const findIndex = (championName: string) => {
+        return dataCopy.findIndex((champion: Champion) => champion.name === championName);
+    }
 
     const handleChampionClick = (championName: string) => {
         setSearchInput(championName); // Set the search input to the clicked champion name
@@ -49,6 +56,10 @@ function SearchBar() {
             alert("Correct!");
             setIsDisabled(true);
         }
+        console.log(findIndex(championName))
+        dataCopy.splice(findIndex(championName), 1);
+        setDataCopy(dataCopy);
+        console.log(dataCopy);
     };
 
     const handleButtonClick = () => {
@@ -58,6 +69,8 @@ function SearchBar() {
         if (champion) { // If a matching champion is found
             setGuesses(champion.name);
             setSearchInput("");
+            dataCopy.splice(findIndex(champion.name), 1);
+            setDataCopy(dataCopy);
         }
     };
 
