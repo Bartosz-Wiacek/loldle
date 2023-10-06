@@ -4,6 +4,7 @@ import data from '../../champ-data.json';
 import './searchBar.css';
 import GuessesTable from "@/components/GuessesTable";
 import Image from "next/image";
+import {TextBlock} from "@/components/TextBlock";
 
 interface Champion {
     name: string;
@@ -84,10 +85,8 @@ function SearchBar() {
             <div className="logo">
                 <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
             </div>
-            <div className="text-container">
-                <h1>Guess todays League of Legends champion!</h1>
-                <h2>Type any champion to begin.</h2>
-            </div>
+            <TextBlock header="Guess todays League of Legends champion!" showButton={false} text="Type any champion to begin.">
+            </TextBlock>
 
             <div className="submit-container">
                 <input
@@ -122,6 +121,7 @@ function SearchBar() {
             </div>
 
             <GuessesTable guess={guesses} extraProps={{ actualChampion: actualChampion }} />
+
         </div>
     );
 }

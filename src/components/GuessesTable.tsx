@@ -2,6 +2,7 @@
 import React, {CSSProperties, useEffect, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
+import {TextBlock} from "@/components/TextBlock";
 
 interface ActualChampion {
     actualChampion: string;
@@ -119,7 +120,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                         {champion.gender}
                     </div>
                     <div className={"table-cell"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
-                        {champion?.position.toString().split(/(?=[A-Z])/).join(' ')}
+                        {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
                     </div>
                     <div className={"table-cell"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
                         {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
@@ -139,6 +140,8 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                 </div>
                 ))}
             </div>
+            <TextBlock header={"Color indicators"} showButton={true}>
+            </TextBlock>
             </div>
 
 

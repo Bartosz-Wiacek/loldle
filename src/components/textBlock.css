@@ -1,0 +1,44 @@
+.text-block-container {
+    position: relative;
+    margin: 0 auto;
+    width: 20%;
+    height: 20%;
+    border: 3px solid #AF9767;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #1E2328;
+}
+
+.header-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.header-block h1 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.header-block h2 {
+    margin-top: 10px;
+    font-size: 17px;
+    color: #8C8C8D;
+}
+
+.exitButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    border: 3px solid #AF9767;
+    background-color: #AD1D1D;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.exitButton:hover {
+    background-color: #C72929;
+}
