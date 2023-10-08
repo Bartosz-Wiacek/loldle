@@ -97,6 +97,7 @@ function SearchBar() {
                     value={searchInput}
                     className="search-input"
                     disabled={isDisabled}
+                    autoFocus={true}
                 />
                 <button onClick={handleButtonClick} disabled={isDisabled}>
                     <Image src={"/button-submit.png"} alt={"test"} width={80} height={80}/>

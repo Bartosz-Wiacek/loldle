@@ -79,72 +79,90 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
         }
     }, [guess]);
 
+    console.log(guess)
+
     return (
-        <div>
-            <div className="table2">
-                {/*Header*/}
-                <div className="table2-head-wraper">
-                <div className="table2-header">
-                    Champion
-                </div>
-                <div className="table2-header">
-                    Gender
-                </div>
-                <div className="table2-header">
-                    Position(s)
-                </div>
-                <div className="table2-header">
-                    Species
-                </div>
-                <div className="table2-header">
-                    Resource
-                </div>
-                <div className="table2-header">
-                    Range type
-                </div>
-                <div className="table2-header">
-                    Region(s)
-                </div>
-                <div className="table2-header">
-                    Release year
-                </div>
+        <>
+            {guess ?
+                <div>
+                    <div className="table2">
+                        {/*Header*/}
+                        <div className="table2-head-wraper">
+                            <div className="table2-header">
+                                Champion
+                            </div>
+                            <div className="table2-header">
+                                Gender
+                            </div>
+                            <div className="table2-header">
+                                Position(s)
+                            </div>
+                            <div className="table2-header">
+                                Species
+                            </div>
+                            <div className="table2-header">
+                                Resource
+                            </div>
+                            <div className="table2-header">
+                                Range type
+                            </div>
+                            <div className="table2-header">
+                                Region(s)
+                            </div>
+                            <div className="table2-header">
+                                Release year
+                            </div>
+                        </div>
+                        {/*Output*/}
+                        {guessedChampions.slice().reverse().map((champion, index) => (
+                            <div key={index} className="table2-output">
+                                <div className="table2-output-champion">
+                                    <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
+                                    <div className={"champion-name"}>{champion.name}</div>
+                                </div>
+                                <div className={"table-cell"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}>
+                                    {champion.gender}
+                                </div>
+                                <div className={"table-cell"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
+                                    {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
+                                </div>
+                                <div className={"table-cell"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
+                                    {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
+                                </div>
+                                <div className={"table-cell"} style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
+                                    {champion?.resource}
+                                </div>
+                                <div className={"table-cell"} style={setColor(champion?.range, actualChampionData?.range.toString())}>
+                                    {champion?.range.toString().split(/(?=[A-Z])/).join(' ')}
+                                </div>
+                                <div className={"table-cell"} style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
+                                    {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
+                                </div>
+                                <div className={setArrow(champion.release_date) as string}>
+                                    {champion.release_date}
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                {/*Output*/}
-                {guessedChampions.slice().reverse().map((champion, index) => (
-                <div key={index} className="table2-output">
-                    <div className="table2-output-champion">
-                        <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
-                        <div className={"champion-name"}>{champion.name}</div>
-                    </div>
-                    <div className={"table-cell"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}>
-                        {champion.gender}
-                    </div>
-                    <div className={"table-cell"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
-                        {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
-                    </div>
-                    <div className={"table-cell"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
-                        {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
-                    </div>
-                    <div className={"table-cell"} style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
-                        {champion?.resource}
-                    </div>
-                    <div className={"table-cell"} style={setColor(champion?.range, actualChampionData?.range.toString())}>
-                        {champion?.range.toString().split(/(?=[A-Z])/).join(' ')}
-                    </div>
-                    <div className={"table-cell"} style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
-                        {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
-                    </div>
-                    <div className={setArrow(champion.release_date) as string}>
-                        {champion.release_date}
-                    </div>
-                </div>
-                ))}
-            </div>
-            <TextBlock header={"Color indicators"} showButton={true}>
-            </TextBlock>
-            </div>
+                    <TextBlock header={"Color indicators"} showButton={true} width={"405px"}>
+                        <div className={"box-wrapper"}>
+                            <div className={"box-container"}>
+                                <div className={"text-block-box"} style={{backgroundColor: "#09C02E"}}></div>
+                                <p>Correct</p>
+                            </div>
+                            <div className={"box-container-partial"}>
+                                <div className={"text-block-box"} style={{backgroundColor: "#DE8610"}}></div>
+                                <p>Partial</p>
+                            </div>
+                            <div className={"box-container"}>
+                                <div className={"text-block-box"} style={{backgroundColor: "#D4110E"}}></div>
+                                <p>Incorrect</p>
+                            </div>
+                        </div>
+                    </TextBlock>
+                </div> : null}
 
-
+        </>
     );
 }
 

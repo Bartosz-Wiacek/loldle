@@ -93,3 +93,22 @@
     filter: brightness(80%);
 }
 
+.text-block-box {
+    width: 30px;
+    height: 30px;
+    background-color: green;
+}
+
+.box-container, .box-container-partial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/*TODO: Make a pop window on hover on partial*/
+
