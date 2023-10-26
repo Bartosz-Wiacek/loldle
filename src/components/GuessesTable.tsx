@@ -1,5 +1,5 @@
 "use client"; // delete after resolving issue with not being in the center
-import React, {CSSProperties, useEffect, useState} from "react";
+import React, {CSSProperties, useEffect, useRef, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
 import {TextBlock} from "@/components/TextBlock";
@@ -28,6 +28,8 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     const [tableData, setTableData] = useState<string[]>([]);
     const [championData, setChampionData] = useState<Champion | null>(null);
     const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
+
+    const isMountedRef = useRef(false);
 
     function lookupChampion(championName: string) {
         return data.find((champion: any) => champion.name === championName);
@@ -70,12 +72,35 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     console.log('actualChampionData')
     console.log(actualChampionData)
 
+    function getIdName(elementId : string) {
+        const element = document.getElementById(elementId);
+        if (element) {
+            return parseInt((document.getElementById(elementId)!.id).substring(1));
+        }
+        return 0;
+    }
+
+    function delayCell(cellId : string) {
+        setTimeout(() => {
+            const elements = document.getElementsByClassName(cellId) as HTMLCollectionOf<HTMLElement>;;
+            elements[0].style.opacity = "1";
+        }, (getIdName(cellId) * 1000));
+    }
+
     useEffect(() => {
-        setTableData([...tableData, guess]);
-        setChampionData(lookupChampion(guess) as any);
-        const champion = lookupChampion(guess);
-        if (champion) {
-            setGuessedChampions((prevChampions : any) => [...prevChampions, champion]);
+        if (isMountedRef.current) {
+            setTableData([...tableData, guess]);
+            setChampionData(lookupChampion(guess) as any);
+            const champion = lookupChampion(guess);
+            if (champion) {
+                setGuessedChampions((prevChampions : any) => [...prevChampions, champion]);
+            }
+            delayCell("a1");
+            delayCell("a2");
+            delayCell("a3");
+            delayCell("a4");
+        } else {
+            isMountedRef.current = true;
         }
     }, [guess]);
 
@@ -120,16 +145,16 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                     <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
                                     <div className={"champion-name"}>{champion.name}</div>
                                 </div>
-                                <div className={"table-cell"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}>
+                                <div className={"table-cell a1"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}>
                                     {champion.gender}
                                 </div>
-                                <div className={"table-cell"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
+                                <div className={"table-cell a2"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
                                     {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
                                 </div>
-                                <div className={"table-cell"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
+                                <div className={"table-cell a3"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
                                     {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
-                                <div className={"table-cell"} style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
+                                <div className={"table-cell a4"} style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
                                     {champion?.resource}
                                 </div>
                                 <div className={"table-cell"} style={setColor(champion?.range, actualChampionData?.range.toString())}>

@@ -87,6 +87,7 @@
     text-align: center;
     margin: 8px 0px 10px 5px;
     border: 1.8px #9A999A solid;
+    opacity: 0;
 }
 
 .table-cell:hover, .goodGuess:hover, .wrongGuessDown:hover, .wrongGuessUp:hover, .midGuess:hover {
@@ -111,4 +112,3 @@
     align-items: center;
 }
 /*TODO: Make a pop window on hover on partial*/
-
