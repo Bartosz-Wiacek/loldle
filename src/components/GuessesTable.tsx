@@ -47,6 +47,10 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }
 
     function setArrow(year: number) {
+        setTimeout(() => {
+            const element = document.getElementById("a6");
+            if (element) element.style.opacity = "1";
+        }, (6000));
         if (year == parseInt(actualChampionData?.release_date as string)) {
             return "goodGuess";
         }
@@ -72,12 +76,9 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     console.log('actualChampionData')
     console.log(actualChampionData)
 
-    function getIdName(elementId : string) {
-        const element = document.getElementById(elementId);
-        if (element) {
-            return parseInt((document.getElementById(elementId)!.id).substring(1));
-        }
-        return 0;
+    function getIdName(elementId: string) {
+        const numericPart = elementId.substring(1); // Remove the first character (the "a" in "a1")
+        return parseInt(numericPart, 10);
     }
 
     function delayCell(cellId : string) {
@@ -85,6 +86,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             const elements = document.getElementsByClassName(cellId) as HTMLCollectionOf<HTMLElement>;;
             elements[0].style.opacity = "1";
         }, (getIdName(cellId) * 1000));
+        console.log((getIdName(cellId) * 1000))
     }
 
     useEffect(() => {
@@ -95,10 +97,13 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             if (champion) {
                 setGuessedChampions((prevChampions : any) => [...prevChampions, champion]);
             }
+            delayCell("a0");
             delayCell("a1");
             delayCell("a2");
             delayCell("a3");
             delayCell("a4");
+            delayCell("a5");
+            // delayCell("a6");
         } else {
             isMountedRef.current = true;
         }
@@ -145,25 +150,25 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                     <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
                                     <div className={"champion-name"}>{champion.name}</div>
                                 </div>
-                                <div className={"table-cell a1"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}>
+                                <div className={"table-cell a0"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}>
                                     {champion.gender}
                                 </div>
-                                <div className={"table-cell a2"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
+                                <div className={"table-cell a1"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
                                     {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
                                 </div>
-                                <div className={"table-cell a3"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
+                                <div className={"table-cell a2"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
                                     {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
-                                <div className={"table-cell a4"} style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
+                                <div className={"table-cell a3"} style={setColor(champion?.resource, actualChampionData?.resource.toString())}>
                                     {champion?.resource}
                                 </div>
-                                <div className={"table-cell"} style={setColor(champion?.range, actualChampionData?.range.toString())}>
+                                <div className={"table-cell a4"} style={setColor(champion?.range, actualChampionData?.range.toString())}>
                                     {champion?.range.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
-                                <div className={"table-cell"} style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
+                                <div className={"table-cell a5"} style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
                                     {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
-                                <div className={setArrow(champion.release_date) as string}>
+                                <div className={setArrow(champion.release_date) as string} id={"a6"}>
                                     {champion.release_date}
                                 </div>
                             </div>
