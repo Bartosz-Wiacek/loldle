@@ -47,8 +47,9 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }
 
     function setArrow(year: number) {
+        const element = document.getElementById("a6");
+        if (element) element.style.opacity = "0";
         setTimeout(() => {
-            const element = document.getElementById("a6");
             if (element) element.style.opacity = "1";
         }, (6000));
         if (year == parseInt(actualChampionData?.release_date as string)) {
@@ -82,11 +83,12 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }
 
     function delayCell(cellId : string) {
+        const elements = document.getElementsByClassName(cellId) as HTMLCollectionOf<HTMLElement>;
+        // elements[0].style.opacity = "0";
+        console.log(elements)
         setTimeout(() => {
-            const elements = document.getElementsByClassName(cellId) as HTMLCollectionOf<HTMLElement>;;
             elements[0].style.opacity = "1";
         }, (getIdName(cellId) * 1000));
-        console.log((getIdName(cellId) * 1000))
     }
 
     useEffect(() => {
@@ -97,13 +99,12 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             if (champion) {
                 setGuessedChampions((prevChampions : any) => [...prevChampions, champion]);
             }
-            delayCell("a0");
+            delayCell("a0");//chyba mozna wyjebac
             delayCell("a1");
             delayCell("a2");
             delayCell("a3");
             delayCell("a4");
             delayCell("a5");
-            // delayCell("a6");
         } else {
             isMountedRef.current = true;
         }
