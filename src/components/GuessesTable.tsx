@@ -3,6 +3,7 @@ import React, {CSSProperties, useEffect, useRef, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
 import {TextBlock} from "@/components/TextBlock";
+import { motion } from "framer-motion"
 
 interface ActualChampion {
     actualChampion: string;
@@ -151,12 +152,17 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                     <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
                                     <div className={"champion-name"}>{champion.name}</div>
                                 </div>
-                                <div className={"table-cell a0"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}>
+                                <motion.div className={"table-cell a0"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}
+                                            animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}>
                                     {champion.gender}
-                                </div>
-                                <div className={"table-cell a1"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}>
+                                </motion.div>
+                                <motion.div className={"table-cell a1"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}
+                                            animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}>
                                     {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
-                                </div>
+                                </motion.div>
+                                {/*Current problems:
+                                - first champ render with opacity 0 has error
+                                - animation works only for the first champion*/}
                                 <div className={"table-cell a2"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
                                     {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
