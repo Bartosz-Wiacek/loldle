@@ -1,42 +1,113 @@
 .goodGuess {
-    background-color: green;
+    background-color: #0BC22F;
 }
 
-.wrongGuess {
-    background-color: red;
+.wrongGuessDown {
+    background-image: url('../../public/arrowDown.png');
+    background-size: cover;
+    background-position: center center;
 }
 
-.midGuess {
-    background-color: orange;
+.wrongGuessUp {
+    background-image: url('../../public/arrowUp.png');
+    background-size: cover;
+    background-position: center center;
 }
 
-table {
-    border-collapse: collapse;
+.champ-image {
+    width: 67px !important;
+    object-fit: cover;
+    border: #9A999A 1.8px solid;
 }
 
-table th, table td {
-    padding: 8px;
+.table2-output-champion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.table {
+.champion-name {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    text-shadow: 2px 2px #000;
+    background-color: #0a414e;
+    border: 1px solid #fff;
+    font-size: 80%;
+    z-index: 1;
+    display: none;
+    max-width: 58px;
+    text-align: center;
+}
+
+.champ-image:hover + .champion-name {
+    display: flex;
+}
+
+.table2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.table2-header {
+    font-size: 14.4px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 67px;
+    border-bottom: white 3px solid;
+    padding-bottom: 2px;
+    margin: 3px;
+}
+
+.table2-head-wraper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.table2-output {
+    display: flex;
+    flex-direction: row;
+}
+
+.table-cell, .goodGuess, .wrongGuessDown, .wrongGuessUp {
+    font-size: 14px;
+    width: 67px;
+    height: 67px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin: 0 auto;
-    width: 40%;
+    margin: 8px 0px 10px 5px;
+    border: 1.8px #9A999A solid;
 }
 
-.line {
-    padding-top: 15px;
-    border-bottom: 3px solid white;
+.table-cell:hover, .goodGuess:hover, .wrongGuessDown:hover, .wrongGuessUp:hover, .midGuess:hover {
+    filter: brightness(80%);
 }
 
-.guessed-champions td {
-/*TODO: make this being separated*/
-    border: 1px white solid;
-    border-collapse: separate;
-    border-spacing: 10px;
-    margin: 10px;
+.text-block-box {
+    width: 30px;
+    height: 30px;
+    background-color: green;
 }
 
+.box-container, .box-container-partial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.box-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/*TODO: Make a pop window on hover on partial*/

@@ -6,22 +6,23 @@
 }
 
 .champion-list {
-    max-height: 150px; /* Adjust the maximum height as needed */
+    max-height: 260px; /* Adjust the maximum height as needed */
+    width: 100%;
     overflow: auto;
 }
 
 .logo {
     display: flex;
     justify-content: center;
+    transition: transform .2s;
 }
 
 .logo img {
     width: 25%;
     height: 25%;
-    transition: transform .2s;
 }
 
-.logo img:hover {
+.logo:hover {
     transform: scale(1.05);
 }
 
@@ -43,7 +44,6 @@
 .text-container h1 {
     margin: 0;
     font-size: 18px;
-    font-weight: bold;
 }
 
 .text-container h2 {
@@ -76,12 +76,23 @@
 }
 
 .output-searchbar {
-    font-size: 17px;
+    font-size: 19px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin: 0 auto;
     width: 20%;
     height: 20%;
     background-color: #1E2328;
+}
+
+.champion-image {
+    display: flex;
+    width: 38px !important;
+    margin: 10px;
+}
+
+.champion-container {
+    display: flex;
+    align-items: center;
 }

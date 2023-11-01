@@ -1,10 +1,12 @@
+@import url('https://fonts.cdnfonts.com/css/friz-quadrata-std');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Regural';
-  src: url('../../public/font.ttf') format('ttf')
+* {
+  overflow-x: hidden;  /*Find better solution*/
+  font-family: 'Friz Quadrata Std', sans-serif;
+  color: aliceblue;
 }
 
 .container {
@@ -15,11 +17,20 @@
   min-height: 100vh;
   min-width: 100vw;
   background-position: center center;
-
-
-  font-family: 'Regural';
-  color: aliceblue;
 }
 
+*::-webkit-scrollbar {
+  width: 20px;
+}
 
+*::-webkit-scrollbar-track {
+  background-color: #424242;
+}
 
+*::-webkit-scrollbar-thumb {
+  background-color: #888888;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #555555;
+}
