@@ -48,11 +48,14 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }
 
     function setArrow(year: number) {
-        const element = document.getElementById("a6");
-        if (element) element.style.opacity = "0";
+        let element: HTMLElement | null = null;
         setTimeout(() => {
-            if (element) element.style.opacity = "1";
-        }, (6000));
+            element = document.getElementById("a6");
+            if (element) element.style.opacity = "0";
+            setTimeout(() => {
+                if (element) element.style.opacity = "1";
+            }, (6000));
+        }, (1));
         if (year == parseInt(actualChampionData?.release_date as string)) {
             return "goodGuess";
         }
@@ -85,8 +88,8 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
 
     function delayCell(cellId : string) {
         const elements = document.getElementsByClassName(cellId) as HTMLCollectionOf<HTMLElement>;
-        // elements[0].style.opacity = "0";
         console.log(elements)
+        elements[0].style.opacity = "0";
         setTimeout(() => {
             elements[0].style.opacity = "1";
         }, (getIdName(cellId) * 1000));
@@ -100,12 +103,14 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             if (champion) {
                 setGuessedChampions((prevChampions : any) => [...prevChampions, champion]);
             }
-            delayCell("a0");//chyba mozna wyjebac
-            delayCell("a1");
-            delayCell("a2");
-            delayCell("a3");
-            delayCell("a4");
-            delayCell("a5");
+            setTimeout(() => {
+                delayCell("a1");
+                delayCell("a2");
+                delayCell("a3");
+                delayCell("a4");
+                delayCell("a5");
+            }, 1);
+
         } else {
             isMountedRef.current = true;
         }
@@ -153,15 +158,16 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                     <div className={"champion-name"}>{champion.name}</div>
                                 </div>
                                 <motion.div className={"table-cell a0"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}
-                                            animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}>
+                                            animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}
+                                >
                                     {champion.gender}
                                 </motion.div>
                                 <motion.div className={"table-cell a1"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}
-                                            animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}>
+                                            animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}
+                                >
                                     {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
                                 </motion.div>
                                 {/*Current problems:
-                                - first champ render with opacity 0 has error
                                 - animation works only for the first champion*/}
                                 <div className={"table-cell a2"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
                                     {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}

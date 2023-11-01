@@ -57,10 +57,8 @@ function SearchBar() {
             alert("Correct!");
             setIsDisabled(true);
         }
-        console.log(findIndex(championName))
         dataCopy.splice(findIndex(championName), 1);
         setDataCopy(dataCopy);
-        console.log(dataCopy);
     };
 
     const handleButtonClick = () => {
