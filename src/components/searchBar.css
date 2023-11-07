@@ -86,12 +86,6 @@
     background-color: #1E2328;
 }
 
-.champion-image {
-    display: flex;
-    width: 38px !important;
-    margin: 10px;
-}
-
 .champion-container {
     display: flex;
     align-items: center;

@@ -4,6 +4,7 @@ import data from '../../champ-data.json';
 import './guessTable.css'
 import {TextBlock} from "@/components/TextBlock";
 import { motion } from "framer-motion"
+import Image from "next/image";
 
 interface ActualChampion {
     actualChampion: string;
@@ -29,7 +30,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     const [tableData, setTableData] = useState<string[]>([]);
     const [championData, setChampionData] = useState<Champion | null>(null);
     const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
-
     const isMountedRef = useRef(false);
 
     function lookupChampion(championName: string) {
@@ -54,7 +54,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             if (element) element.style.opacity = "0";
             setTimeout(() => {
                 if (element) element.style.opacity = "1";
-            }, (6000));
+            }, (8000));
         }, (1));
         if (year == parseInt(actualChampionData?.release_date as string)) {
             return "goodGuess";
@@ -88,10 +88,10 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
 
     function delayCell(cellId : string) {
         const elements = document.getElementsByClassName(cellId) as HTMLCollectionOf<HTMLElement>;
-        console.log(elements)
         elements[0].style.opacity = "0";
         setTimeout(() => {
             elements[0].style.opacity = "1";
+            console.log("Delay from cell: " + getIdName(cellId));
         }, (getIdName(cellId) * 1000));
     }
 
@@ -115,6 +115,14 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             isMountedRef.current = true;
         }
     }, [guess]);
+
+
+    function animateCell() {
+        return {
+            scale: [1, 1.2, 1],
+            transition: { duration: 0.3 }
+        };
+    }
 
     console.log(guess)
 
@@ -154,21 +162,34 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                         {guessedChampions.slice().reverse().map((champion, index) => (
                             <div key={index} className="table2-output">
                                 <div className="table2-output-champion">
-                                    <img className="champ-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
+                                    <div className={"champ-image"}>
+                                        <Image
+                                            alt={champion.name}
+                                            src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`}
+                                            width={67} // Set the width as per your CSS
+                                            height={67} // Height should be the same as width for a square aspect ratio, adjust if necessary
+                                            style={{
+                                                objectFit: 'cover',
+                                                border: '1.8px solid #9A999A'
+                                            }}
+                                        />
+                                    </div>
+
                                     <div className={"champion-name"}>{champion.name}</div>
                                 </div>
                                 <motion.div className={"table-cell a0"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}
-                                            animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}
+                                            // animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}
                                 >
                                     {champion.gender}
                                 </motion.div>
                                 <motion.div className={"table-cell a1"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}
-                                            animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}
+                                            // animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}
                                 >
                                     {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
                                 </motion.div>
                                 {/*Current problems:
-                                - animation works only for the first champion*/}
+                                - animation works only for the first champion
+                                - bugged release year*/}
                                 <div className={"table-cell a2"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
                                     {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
