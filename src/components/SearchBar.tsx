@@ -110,8 +110,14 @@ function SearchBar() {
                                 onClick={() => handleChampionClick(champ.name)} // Add click handler
                             >
                                 <div className="champion-container">
-                                    <img className="champion-image" src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png`} />
-                                {champ.name}
+                                    <Image
+                                        alt={champ.name}
+                                        width={38}
+                                        height={38}
+                                        style={{margin: "10px"}}
+                                        src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png`}
+                                    />
+                                    {champ.name}
                                 </div>
                             </div>
                         ))}

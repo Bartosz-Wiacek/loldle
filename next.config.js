@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'export',
+    images: {
+        domains: ['ddragon.leagueoflegends.com'],
+    },
+    // ... any other config options you may have
 }
 
 module.exports = nextConfig
