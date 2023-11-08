@@ -3,6 +3,7 @@ const nextConfig = {
     output: 'export',
     images: {
         domains: ['ddragon.leagueoflegends.com'],
+        unoptimized: true,
     },
 }
 

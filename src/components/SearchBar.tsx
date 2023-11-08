@@ -98,7 +98,7 @@ function SearchBar() {
                     autoFocus={true}
                 />
                 <button onClick={handleButtonClick} disabled={isDisabled}>
-                    <Image src={"/button-submit.png"} alt={"test"} width={80} height={80}/>
+                    <Image src={"./button-submit.png"} alt={"SUBMIT"} width={80} height={80}/>
                 </button>
             </div>
             <div className="output-searchbar">
