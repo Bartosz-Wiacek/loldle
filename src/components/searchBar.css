@@ -20,6 +20,11 @@
 .logo img {
     width: 25%;
     height: 25%;
+
+    @media (max-width: 768px) {
+        width: 50%;
+        height: 50%;
+    }
 }
 
 .logo:hover {
@@ -73,6 +78,10 @@
     align-items: center;
     margin: 0 auto;
     width: 20%;
+
+    @media (max-width: 768px) {
+        width: 80%;
+    }
 }
 
 .output-searchbar {
@@ -84,6 +93,10 @@
     width: 20%;
     height: 20%;
     background-color: #1E2328;
+
+    @media (max-width: 768px) {
+        width: 80%;
+    }
 }
 
 .champion-container {

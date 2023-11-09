@@ -15,7 +15,10 @@
 }
 
 .champ-image {
-
+    @media (max-width: 768px) {
+        width: 33px;
+        height: 33px;
+    }
 }
 
 .table2-output-champion {
@@ -38,6 +41,10 @@
     display: none;
     max-width: 58px;
     text-align: center;
+
+    @media (max-width: 768px) {
+        max-width: 29px;
+    }
 }
 
 .champ-image:hover + .champion-name {
@@ -62,6 +69,11 @@
     border-bottom: white 3px solid;
     padding-bottom: 2px;
     margin: 3px;
+
+    @media (max-width: 768px) {
+        width: 33px;
+        font-size: 8px;
+    }
 }
 
 .table2-head-wraper {
@@ -85,6 +97,12 @@
     text-align: center;
     margin: 8px 0px 10px 5px;
     border: 1.8px #9A999A solid;
+
+    @media (max-width: 768px) {
+        width: 33px;
+        height: 33px;
+        font-size: 9px;
+    }
 }
 
 .table-cell:hover, .goodGuess:hover, .wrongGuessDown:hover, .wrongGuessUp:hover, .midGuess:hover {
@@ -95,6 +113,11 @@
     width: 30px;
     height: 30px;
     background-color: green;
+
+    @media (max-width: 768px) {
+        width: 15px;
+        height: 15px;
+    }
 }
 
 .box-container, .box-container-partial {
