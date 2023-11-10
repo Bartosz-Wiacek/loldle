@@ -28,6 +28,29 @@ function SearchBar() {
         setFilteredChampions(filteredChamps.slice(0, 11));
     };
 
+    function createEmoji() {
+        const emojiArray = ['😀', '🏆', '🎉', '🌟', '🙏']; // Add more emojis as needed
+        const emoji = document.createElement('div');
+        emoji.classList.add('emoji');
+        emoji.textContent = emojiArray[Math.floor(Math.random() * emojiArray.length)];
+        emoji.style.left = Math.random() * 100 + 'vw';
+        emoji.style.animationDuration = Math.random() * 3 + 3 + 's'; // Randomize speed
+        document.getElementById('emoji-container')?.appendChild(emoji);
+
+        emoji.addEventListener('animationend', () => {
+            emoji.parentNode?.removeChild(emoji);
+        });
+    }
+
+    const handleWonGame = () => {
+        setTimeout(() => {
+            for (let i = 0; i < 70; i++) {
+                createEmoji();
+            }
+            setIsDisabled(true);
+        }, 6500);
+    }
+
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.keyCode === 13 && filteredChampions.length > 0) { // Check if Enter key is pressed and there are filtered champions
             const firstChampion = filteredChampions[0].name;
@@ -36,8 +59,7 @@ function SearchBar() {
             setGuesses(firstChampion);
             setSearchInput("");
             if (firstChampion === actualChampion) {
-                alert("Correct!");
-                setIsDisabled(true);
+                handleWonGame();
             }
             dataCopy.splice(findIndex(firstChampion), 1);
             setDataCopy(dataCopy);
@@ -54,8 +76,7 @@ function SearchBar() {
         setGuesses(championName);
         setSearchInput("");
         if (championName === actualChampion) {
-            alert("Correct!");
-            setIsDisabled(true);
+            handleWonGame();
         }
         dataCopy.splice(findIndex(championName), 1);
         setDataCopy(dataCopy);
@@ -80,6 +101,7 @@ function SearchBar() {
 
     return (
         <div className="container">
+            <div id="emoji-container"></div>
             <div className="logo">
                 <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
             </div>
