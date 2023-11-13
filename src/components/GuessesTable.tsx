@@ -1,5 +1,4 @@
-"use client"; // delete after resolving issue with not being in the center
-import React, {CSSProperties, useEffect, useRef, useState} from "react";
+import React, {CSSProperties, useEffect, useMemo, useRef, useState} from "react";
 import data from '../../champ-data.json';
 import './guessTable.css'
 import {TextBlock} from "@/components/TextBlock";
@@ -25,7 +24,9 @@ interface Champion {
 function GuessesTable({ guess, extraProps }: { guess: string; extraProps: ActualChampion}) {
 
     const { actualChampion } = extraProps;
-    const actualChampionData = lookupChampion(actualChampion)
+    const actualChampionData = useMemo(() => {
+        return lookupChampion(actualChampion);
+    }, [actualChampion]);
 
     const [tableData, setTableData] = useState<string[]>([]);
     const [championData, setChampionData] = useState<Champion | null>(null);
@@ -48,14 +49,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }
 
     function setArrow(year: number) {
-        let element: HTMLElement | null = null;
-        setTimeout(() => {
-            element = document.getElementById("a6");
-            if (element) element.style.opacity = "0";
-            setTimeout(() => {
-                if (element) element.style.opacity = "1";
-            }, (8000));
-        }, (1));
         if (year == parseInt(actualChampionData?.release_date as string)) {
             return "goodGuess";
         }
@@ -63,18 +56,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             return "wrongGuessDown";
         } else {
             return "wrongGuessUp";
-        }
-    }
-
-    function comparePositions(championPosition: any) { // TODO: Fix this function or maybe it will fix itself when we get new json data
-        const defaultStyle: CSSProperties = { color: 'white' };
-        if ((championPosition[0] == (actualChampionData?.position[0]) || actualChampionData?.position[1]) &&
-        (championPosition[1] == (actualChampionData?.position[0]) || actualChampionData?.position[1])) {
-            return { ...defaultStyle, color: 'green' };
-        }
-        else
-        {
-            setColor(championPosition.toString(), actualChampionData?.position.toString())
         }
     }
 
@@ -91,7 +72,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
         elements[0].style.opacity = "0";
         setTimeout(() => {
             elements[0].style.opacity = "1";
-            console.log("Delay from cell: " + getIdName(cellId));
         }, (getIdName(cellId) * 1000));
     }
 
@@ -109,6 +89,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                 delayCell("a3");
                 delayCell("a4");
                 delayCell("a5");
+                delayCell("a6");
             }, 1);
 
         } else {
@@ -122,6 +103,33 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             scale: [1, 1.2, 1],
             transition: { duration: 0.3 }
         };
+    }
+
+    const isSpecialChampionName = (championName: string) => {
+        if (championName == "LeBlanc" || championName == "Wukong" || championName == "Cho'Gath" || championName == "Kai'Sa" || championName == "Kha'Zix" || championName == "Vel'Koz" || championName == "Nunu & Willump") {
+            return true;
+        }
+    }
+
+    const specialChampionNewUrl = (championName: string) => {
+        switch (championName) {
+            case "Wukong":
+                return "MonkeyKing";
+            case "Cho'Gath":
+                return "Chogath";
+            case "Kai'Sa":
+                return "Kaisa";
+            case "Kha'Zix":
+                return "Khazix";
+            case "Vel'Koz":
+                return "Velkoz";
+            case "Nunu & Willump":
+                return "Nunu";
+            case "LeBlanc":
+                return "Leblanc";
+            default:
+                return championName;
+        }
     }
 
     console.log(guess)
@@ -165,7 +173,8 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                     <div className={"champ-image"}>
                                         <Image
                                             alt={champion.name}
-                                            src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png`}
+                                            src={ isSpecialChampionName(champion.name) ? `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${specialChampionNewUrl(champion.name)}.png`
+                                                : `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png` }
                                             width={67} // Set the width as per your CSS
                                             height={67} // Height should be the same as width for a square aspect ratio, adjust if necessary
                                             style={{
@@ -188,8 +197,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                     {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
                                 </motion.div>
                                 {/*Current problems:
-                                - animation works only for the first champion
-                                - bugged release year*/}
+                                - animation works only for the first champion*/}
                                 <div className={"table-cell a2"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
                                     {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
@@ -202,7 +210,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                 <div className={"table-cell a5"} style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
                                     {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
-                                <div className={setArrow(champion.release_date) as string} id={"a6"}>
+                                <div className={setArrow(champion.release_date) as string + " a6"}>
                                     {champion.release_date}
                                 </div>
                             </div>

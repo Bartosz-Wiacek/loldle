@@ -94,6 +94,33 @@ function SearchBar() {
         }
     };
 
+    const isSpecialChampionName = (championName: string) => {
+        if (championName == "LeBlanc" || championName == "Wukong" || championName == "Cho'Gath" || championName == "Kai'Sa" || championName == "Kha'Zix" || championName == "Vel'Koz" || championName == "Nunu & Willump") {
+            return true;
+        }
+    }
+
+    const specialChampionNewUrl = (championName: string) => {
+        switch (championName) {
+            case "Wukong":
+                return "MonkeyKing";
+            case "Cho'Gath":
+                return "Chogath";
+            case "Kai'Sa":
+                return "Kaisa";
+            case "Kha'Zix":
+                return "Khazix";
+            case "Vel'Koz":
+                return "Velkoz";
+            case "Nunu & Willump":
+                return "Nunu";
+            case "LeBlanc":
+                    return "Leblanc";
+            default:
+                return championName;
+        }
+    }
+
     useEffect(() => {
         setActualChampion(data[Math.floor(Math.random() * data.length)].name);
     }, []);
@@ -137,7 +164,8 @@ function SearchBar() {
                                         width={38}
                                         height={38}
                                         style={{margin: "10px"}}
-                                        src={`https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png`}
+                                        src={ isSpecialChampionName(champ.name) ? `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${specialChampionNewUrl(champ.name)}.png`
+                                            : `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png` }
                                     />
                                     {champ.name}
                                 </div>
