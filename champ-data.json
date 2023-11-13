@@ -302,7 +302,7 @@
   {
     "name": "Fizz",
     "gender": "Male",
-    "position": ["Mid", "Jungle"],
+    "position": ["Mid"],
     "species": ["Yordle"],
     "resource": ["Mana"],
     "range": ["Melee"],
@@ -484,7 +484,7 @@
     "gender": "Female",
     "position": ["ADC", "Mid"],
     "species": ["Human", "Voidborn"],
-    "resource": ["Mana", "Living Weapon"],
+    "resource": ["Mana"],
     "range": ["Ranged"],
     "regions": ["Icathia"],
     "release_date": "2018"
