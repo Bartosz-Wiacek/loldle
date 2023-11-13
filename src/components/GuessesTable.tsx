@@ -48,14 +48,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     }
 
     function setArrow(year: number) {
-        let element: HTMLElement | null = null;
-        setTimeout(() => {
-            element = document.getElementById("a6");
-            if (element) element.style.opacity = "0";
-            setTimeout(() => {
-                if (element) element.style.opacity = "1";
-            }, (8000));
-        }, (1));
         if (year == parseInt(actualChampionData?.release_date as string)) {
             return "goodGuess";
         }
@@ -109,6 +101,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                 delayCell("a3");
                 delayCell("a4");
                 delayCell("a5");
+                delayCell("a6");
             }, 1);
 
         } else {
@@ -202,7 +195,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                 <div className={"table-cell a5"} style={setColor(champion?.regions, actualChampionData?.regions.toString())}>
                                     {champion?.regions.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
-                                <div className={setArrow(champion.release_date) as string} id={"a6"}>
+                                <div className={setArrow(champion.release_date) as string + " a6"}>
                                     {champion.release_date}
                                 </div>
                             </div>
