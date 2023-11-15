@@ -4,6 +4,7 @@ import './guessTable.css'
 import {TextBlock} from "@/components/TextBlock";
 import { motion } from "framer-motion"
 import Image from "next/image";
+import {CluesBlock} from "@/components/CluesBlock";
 
 interface ActualChampion {
     actualChampion: string;
@@ -232,6 +233,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                             </div>
                         </div>
                     </TextBlock>
+                    <CluesBlock actualChampionName={actualChampion} />
                 </div> : null}
 
         </>
