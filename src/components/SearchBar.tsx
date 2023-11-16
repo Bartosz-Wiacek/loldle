@@ -5,6 +5,7 @@ import './searchBar.css';
 import GuessesTable from "@/components/GuessesTable";
 import Image from "next/image";
 import {TextBlock} from "@/components/TextBlock";
+import {CluesBlock} from "@/components/CluesBlock";
 
 interface Champion {
     name: string;
@@ -17,6 +18,7 @@ function SearchBar() {
     const [actualChampion, setActualChampion] = useState<string>("");
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
     const [dataCopy, setDataCopy] = useState(Array.from(Object.values(data)));
+    const [guessesCounter, setGuessesCounter] = useState<number>(0);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
@@ -57,6 +59,7 @@ function SearchBar() {
             setSearchInput(firstChampion);
             setFilteredChampions([]);
             setGuesses(firstChampion);
+            setGuessesCounter((prev) => prev + 1);
             setSearchInput("");
             if (firstChampion === actualChampion) {
                 handleWonGame();
@@ -74,6 +77,7 @@ function SearchBar() {
         setSearchInput(championName); // Set the search input to the clicked champion name
         setFilteredChampions([]); // Clear the filtered champion list
         setGuesses(championName);
+        setGuessesCounter((prev) => prev + 1);
         setSearchInput("");
         if (championName === actualChampion) {
             handleWonGame();
@@ -125,15 +129,14 @@ function SearchBar() {
         setActualChampion(data[Math.floor(Math.random() * data.length)].name);
     }, []);
 
-
     return (
         <div className="container">
             <div id="emoji-container"></div>
             <div className="logo">
                 <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
             </div>
-            <TextBlock header="Guess todays League of Legends champion!" showButton={false} text="Type any champion to begin.">
-            </TextBlock>
+            {!!guesses ? <CluesBlock actualChampionName={actualChampion} header={"Guess todays League of Legends champion!"} guessesCounter={guessesCounter} />
+                : <TextBlock header="Guess todays League of Legends champion!" showButton={false} text="Type any champion to begin." />}
 
             <div className="submit-container">
                 <input

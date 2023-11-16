@@ -1,0 +1,16 @@
+.clues-block {
+    display: flex;
+    justify-content: space-around;
+}
+
+.clues-block-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.clues-description {
+    color: rgb(167, 167, 167);
+    font-size: 9.6px;
+    text-shadow: rgba(0, 0, 0, 0.3);
+}

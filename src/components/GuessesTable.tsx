@@ -233,7 +233,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                             </div>
                         </div>
                     </TextBlock>
-                    <CluesBlock actualChampionName={actualChampion} />
                 </div> : null}
 
         </>
