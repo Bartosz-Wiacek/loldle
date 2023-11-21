@@ -14,3 +14,13 @@
     font-size: 9.6px;
     text-shadow: rgba(0, 0, 0, 0.3);
 }
+
+.clues-title {
+    color: #e4e4e4;
+    text-shadow: rgba(0, 0, 0, 0.3) 2px 4px 3px;
+}
+
+.clues-block-holder:hover {
+    transform: scale(1.01);
+    transition: transform 0.5s;
+}

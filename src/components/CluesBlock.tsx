@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import rawQuotesData from '../../quotes-data.json';
 import './cluesBlock.css';
 import {TextBlock} from "@/components/TextBlock";
@@ -28,13 +28,23 @@ export function CluesBlock({actualChampionName, header, guessesCounter}: {actual
             <TextBlock header={header} showButton={false}>
                 <div className="clues-block">
                     <div className="clues-block-holder">
-                        <Image src={'./quotes-icon.png'} alt={'quotes-icon'} width={57} height={57}/>
-                        <p className={"clues-description"}>Quote Clue in {6 - guessesCounter} tries</p>
+                        {(((6 - guessesCounter) <= 0) ? <><Image src={'./quotes-icon-active.png'} alt={'quotes-icon'} width={57} height={57}/>
+                                <p className={"clues-title"}>Quote Clue</p></>
+
+                            : <><Image src={'./quotes-icon.png'} alt={'quotes-icon'} width={57} height={57}/>
+                                <p className={"clues-description"}>Quote Clue in {6 - guessesCounter} tries</p></>  )}
                     </div>
                     <div className="clues-block-holder">
-                        <Image src={'./splash-icon.png'} alt={'splash-icon'} width={57} height={57}/>
-                        <p className={"clues-description"}>Splash Clue in {12 - guessesCounter} tries</p>
+                        {(((12 - guessesCounter) <= 0) ? <><Image src={'./splash-icon-active.png'} alt={'quotes-icon'} width={57} height={57}/>
+                                <p className={"clues-title"}>Splash Clue</p></>
+
+                            : <><Image src={'./splash-icon.png'} alt={'quotes-icon'} width={57} height={57}/>
+                                <p className={"clues-description"}>Quote Clue in {12 - guessesCounter} tries</p></>  )}
                     </div>
+                    {/*<div className="clues-block-holder">*/}
+                    {/*    <Image src={'./splash-icon.png'} alt={'splash-icon'} width={57} height={57}/>*/}
+                    {/*    <p className={"clues-description"}>Splash Clue in {12 - guessesCounter} tries</p>*/}
+                    {/*</div>*/}
                 </div>
             </TextBlock>
         </>
