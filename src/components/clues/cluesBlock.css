@@ -21,6 +21,11 @@
 }
 
 .clues-block-holder:hover {
-    transform: scale(1.01);
+    transform: scale(0.90);
     transition: transform 0.5s;
+    cursor: pointer;
+}
+
+.clues-text {
+    font-size: 27.2px;
 }

@@ -5,7 +5,7 @@ import './searchBar.css';
 import GuessesTable from "@/components/GuessesTable";
 import Image from "next/image";
 import {TextBlock} from "@/components/TextBlock";
-import {CluesBlock} from "@/components/CluesBlock";
+import {CluesBlock} from "@/components/clues/CluesBlock";
 
 interface Champion {
     name: string;
