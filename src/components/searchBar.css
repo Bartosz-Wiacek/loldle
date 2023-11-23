@@ -83,8 +83,8 @@
         width: 80%;
     }
 
-    @media (max-width: 1440px) {
-        width: 30%;
+    @media (min-width: 769px) and (max-width: 1440px) {
+        width: 70%;
     }
 }
 
@@ -102,8 +102,8 @@
         width: 80%;
     }
 
-    @media (max-width: 1440px) {
-        width: 30%;
+    @media (min-width: 769px) and (max-width: 1440px) {
+        width: 70%;
     }
 }
 
