@@ -35,8 +35,32 @@ export function CluesBlock({actualChampionName, header, guessesCounter}: {actual
         <>
             <TextBlock header={header} showButton={false}>
                 <div className="clues-block">
-                    <CluesElement numberToClue={3} guessesCounter={guessesCounter} imageName={'quotes-icon'} imageAlt={'quotes-icon'} title={'Quote Clue'} handleClick={() => setShowQuote(!showQuote)}/>
-                    <CluesElement numberToClue={6} guessesCounter={guessesCounter} imageName={'splash-icon'} imageAlt={'splash-icon'} title={'Splash Clue'} handleClick={() => setShowSplash(!showSplash)}/>
+                    <CluesElement
+                        numberToClue={3}
+                        guessesCounter={guessesCounter}
+                        imageName={'quotes-icon'}
+                        imageAlt={'quotes-icon'}
+                        title={'Quote Clue'}
+                        handleClick={() => {
+                            setShowQuote(!showQuote);
+                            if(!showQuote) {
+                                setShowSplash(false);
+                            }
+                        }}
+                    />
+                    <CluesElement
+                        numberToClue={6}
+                        guessesCounter={guessesCounter}
+                        imageName={'splash-icon'}
+                        imageAlt={'splash-icon'}
+                        title={'Splash Clue'}
+                        handleClick={() => {
+                            setShowSplash(!showSplash);
+                            if(!showSplash) {
+                                setShowQuote(false);
+                            }
+                        }}
+                    />
                 </div>
                 {showQuote ? <p className={"clues-text"}>{'"' + randomQuote + '"'}</p> : null}
                 {showSplash ?<div style={{display: "flex", justifyContent: "center"}}>
