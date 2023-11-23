@@ -5,30 +5,15 @@ type TextBlockProps = {
     header: string;
     text?: string;
     showButton: boolean;
-    width?: string;
     children?: React.ReactNode;
 }
 
-export function TextBlock({header, text, showButton, width, children}: TextBlockProps){
+export function TextBlock({header, text, showButton, children}: TextBlockProps){
     const [show, setShow] = useState(true);
-
-    function isMedia(): boolean {
-        if (typeof window !== 'undefined') {
-            return window.innerWidth <= 768;
-        }
-        return false;
-    }
-
-    function setWidth(isMedia: boolean) {
-        if (isMedia) {
-            return "80%";
-        }
-        return width?.toString();
-    }
 
     return (
         <>
-            {show ? <div className="text-block-container" style={{width: setWidth(isMedia())}}>
+            {show ? <div className="text-block-container" >
                 {(showButton && <button onClick={() => setShow(false)} className={"exitButton"}>X</button>)}
                 <div className="header-block">
                     <h1>{header}</h1>

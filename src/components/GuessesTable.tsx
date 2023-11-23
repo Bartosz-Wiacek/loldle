@@ -189,7 +189,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                             </div>
                         ))}
                     </div>
-                    <TextBlock header={"Color indicators"} showButton={true} width={"405px"}>
+                    <TextBlock header={"Color indicators"} showButton={true}>
                         <div className={"box-wrapper"}>
                             <div className={"box-container"}>
                                 <div className={"text-block-box"} style={{backgroundColor: "#09C02E"}}></div>

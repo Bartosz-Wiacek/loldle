@@ -27,6 +27,10 @@ export function CluesBlock({actualChampionName, header, guessesCounter}: {actual
         return quotes[Math.floor(Math.random() * quotes.length)];
     }, [actualChampionName]);
 
+    const randomInteger = useMemo(() => {
+        return Math.floor(Math.random() * 3);
+    }, []);
+
     return (
         <>
             <TextBlock header={header} showButton={false}>
@@ -35,9 +39,11 @@ export function CluesBlock({actualChampionName, header, guessesCounter}: {actual
                     <CluesElement numberToClue={6} guessesCounter={guessesCounter} imageName={'splash-icon'} imageAlt={'splash-icon'} title={'Splash Clue'} handleClick={() => setShowSplash(!showSplash)}/>
                 </div>
                 {showQuote ? <p className={"clues-text"}>{'"' + randomQuote + '"'}</p> : null}
-                {showSplash ? <Image
-                    src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${specialChampionNewUrl(actualChampionName)}_0.jpg`}
-                    alt={"splash-art"} width={500} height={350} /> : null}
+                {showSplash ?<div style={{display: "flex", justifyContent: "center"}}>
+                    <Image
+                    src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${specialChampionNewUrl(actualChampionName)}_${randomInteger}.jpg`}
+                    alt={"splash-art"} width={500} height={350} />
+                </div>  : null}
             </TextBlock>
         </>
 
