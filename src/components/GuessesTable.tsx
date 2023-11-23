@@ -105,33 +105,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
         };
     }
 
-    const isSpecialChampionName = (championName: string) => {
-        if (championName == "LeBlanc" || championName == "Wukong" || championName == "Cho'Gath" || championName == "Kai'Sa" || championName == "Kha'Zix" || championName == "Vel'Koz" || championName == "Nunu & Willump") {
-            return true;
-        }
-    }
-
-    const specialChampionNewUrl = (championName: string) => {
-        switch (championName) {
-            case "Wukong":
-                return "MonkeyKing";
-            case "Cho'Gath":
-                return "Chogath";
-            case "Kai'Sa":
-                return "Kaisa";
-            case "Kha'Zix":
-                return "Khazix";
-            case "Vel'Koz":
-                return "Velkoz";
-            case "Nunu & Willump":
-                return "Nunu";
-            case "LeBlanc":
-                return "Leblanc";
-            default:
-                return championName;
-        }
-    }
-
     console.log(guess)
 
     return (
@@ -216,7 +189,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                             </div>
                         ))}
                     </div>
-                    <TextBlock header={"Color indicators"} showButton={true} width={"405px"}>
+                    <TextBlock header={"Color indicators"} showButton={true}>
                         <div className={"box-wrapper"}>
                             <div className={"box-container"}>
                                 <div className={"text-block-box"} style={{backgroundColor: "#09C02E"}}></div>
@@ -239,3 +212,30 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
 }
 
 export default GuessesTable;
+
+export function isSpecialChampionName(championName: string) {
+    if (championName == "LeBlanc" || championName == "Wukong" || championName == "Cho'Gath" || championName == "Kai'Sa" || championName == "Kha'Zix" || championName == "Vel'Koz" || championName == "Nunu & Willump") {
+        return true;
+    }
+}
+
+export function specialChampionNewUrl(championName: string) {
+    switch (championName) {
+        case "Wukong":
+            return "MonkeyKing";
+        case "Cho'Gath":
+            return "Chogath";
+        case "Kai'Sa":
+            return "Kaisa";
+        case "Kha'Zix":
+            return "Khazix";
+        case "Vel'Koz":
+            return "Velkoz";
+        case "Nunu & Willump":
+            return "Nunu";
+        case "LeBlanc":
+            return "Leblanc";
+        default:
+            return championName;
+    }
+}
