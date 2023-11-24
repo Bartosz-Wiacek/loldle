@@ -119,7 +119,7 @@
 
 .emoji {
     position: absolute;
-    animation: fall 5s linear;
+    animation: fall 1s linear;
     font-size: 48px;
 }
 

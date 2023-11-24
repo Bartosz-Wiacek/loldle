@@ -22,7 +22,7 @@ export function CluesElement({numberToClue, guessesCounter, imageName, imageAlt,
                     <p className={"clues-title"}>{title}</p></>
 
                 : <><Image src={'./' + imageName + '.png'} alt={imageAlt} width={57} height={57}/>
-                    <p className={"clues-description"}>{title} in {6 - guessesCounter} tries</p></>  )}
+                    <p className={"clues-description"}>{title} in {numberToClue - guessesCounter} tries</p></>  )}
         </div>
     );
 }
