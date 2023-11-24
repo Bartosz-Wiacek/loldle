@@ -36,7 +36,7 @@ function SearchBar() {
         emoji.classList.add('emoji');
         emoji.textContent = emojiArray[Math.floor(Math.random() * emojiArray.length)];
         emoji.style.left = Math.random() * 100 + 'vw';
-        emoji.style.animationDuration = Math.random() * 3 + 3 + 's'; // Randomize speed
+        emoji.style.animationDuration = Math.random() + 1.5 + 's'; // Randomize speed
         document.getElementById('emoji-container')?.appendChild(emoji);
 
         emoji.addEventListener('animationend', () => {
@@ -50,7 +50,7 @@ function SearchBar() {
                 createEmoji();
             }
             setIsDisabled(true);
-        }, 6500);
+        }, 3250);
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

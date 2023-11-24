@@ -72,7 +72,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
         elements[0].style.opacity = "0";
         setTimeout(() => {
             elements[0].style.opacity = "1";
-        }, (getIdName(cellId) * 1000));
+        }, (getIdName(cellId) * 500));
     }
 
     useEffect(() => {
