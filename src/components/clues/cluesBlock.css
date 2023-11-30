@@ -29,3 +29,10 @@
 .clues-text {
     font-size: 27.2px;
 }
+
+.zoomed-image {
+    border: 10px;
+    border-radius: 10px;
+}
+
+
