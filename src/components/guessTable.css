@@ -132,3 +132,19 @@
     align-items: center;
 }
 /*TODO: Make a pop window on hover on partial*/
+
+@keyframes shakeUp {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(-5px);
+    }
+    50% {
+        transform: translateY(5px);
+    }
+    75% {
+        transform: translateY(-5px);
+    }
+}
+
