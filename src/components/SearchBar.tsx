@@ -65,9 +65,27 @@ function SearchBar() {
                 handleWonGame();
             }
             dataCopy.splice(findIndex(firstChampion), 1);
-            setDataCopy(dataCopy);
+            handleGuess();
         }
     };
+
+    const handleGuess = () => {
+        setDataCopy(dataCopy);
+        setIsDisabled(true);
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 3200);
+    }
+
+    useEffect(() => {
+        if (!isDisabled) {
+            const searchInput = document.getElementById("search-input");
+            if (searchInput) {
+                searchInput.focus();
+            }
+        }
+    }, [isDisabled]);
+
 
     const findIndex = (championName: string) => {
         return dataCopy.findIndex((champion: Champion) => champion.name === championName);
@@ -83,7 +101,7 @@ function SearchBar() {
             handleWonGame();
         }
         dataCopy.splice(findIndex(championName), 1);
-        setDataCopy(dataCopy);
+        handleGuess();
     };
 
     const handleButtonClick = () => {
@@ -148,6 +166,7 @@ function SearchBar() {
                     className="search-input"
                     disabled={isDisabled}
                     autoFocus={true}
+                    id={"search-input"}
                 />
                 <button onClick={handleButtonClick} disabled={isDisabled}>
                     <Image src={"./button-submit.png"} alt={"SUBMIT"} width={80} height={80}/>

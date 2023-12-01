@@ -70,9 +70,11 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
     function delayCell(cellId : string) {
         const elements = document.getElementsByClassName(cellId) as HTMLCollectionOf<HTMLElement>;
         elements[0].style.opacity = "0";
+        elements[0].style.animation = "none";
         setTimeout(() => {
             elements[0].style.opacity = "1";
-        }, (getIdName(cellId) * 500));
+            elements[0].style.animation = "shakeUp 0.5s";
+        }, ((getIdName(cellId) + 0.1) * 500));
     }
 
     useEffect(() => {
@@ -84,6 +86,7 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                 setGuessedChampions((prevChampions : any) => [...prevChampions, champion]);
             }
             setTimeout(() => {
+                delayCell("a0");
                 delayCell("a1");
                 delayCell("a2");
                 delayCell("a3");
@@ -96,14 +99,6 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
             isMountedRef.current = true;
         }
     }, [guess]);
-
-
-    function animateCell() {
-        return {
-            scale: [1, 1.2, 1],
-            transition: { duration: 0.3 }
-        };
-    }
 
     console.log(guess)
 
@@ -159,18 +154,14 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
 
                                     <div className={"champion-name"}>{champion.name}</div>
                                 </div>
-                                <motion.div className={"table-cell a0"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}
-                                            // animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}
+                                <div className={"table-cell a0"} style={setColor(champion?.gender.toString(), actualChampionData?.gender.toString())}
                                 >
                                     {champion.gender}
-                                </motion.div>
-                                <motion.div className={"table-cell a1"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}
-                                            // animate={{ scale: [1, 1.2, 1], transition: { duration: 0.3 } }}
+                                </div>
+                                <div className={"table-cell a1"} style={setColor(champion?.position.toString(), actualChampionData?.position.toString())}
                                 >
                                     {champion?.position.toString().split(/(?=[E-Z])/).join(' ')}
-                                </motion.div>
-                                {/*Current problems:
-                                - animation works only for the first champion*/}
+                                </div>
                                 <div className={"table-cell a2"} style={setColor(champion?.species, actualChampionData?.species.toString())}>
                                     {champion?.species.toString().split(/(?=[A-Z])/).join(' ')}
                                 </div>
