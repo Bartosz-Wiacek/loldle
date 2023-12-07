@@ -19,6 +19,7 @@ function SearchBar() {
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
     const [dataCopy, setDataCopy] = useState(Array.from(Object.values(data)));
     const [guessesCounter, setGuessesCounter] = useState<number>(0);
+    const [didWin, setDidWin] = useState<boolean>(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
@@ -51,6 +52,7 @@ function SearchBar() {
             }
             setIsDisabled(true);
         }, 3250);
+        setDidWin(true);
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -153,7 +155,7 @@ function SearchBar() {
             <div className="logo">
                 <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
             </div>
-            {!!guesses ? <CluesBlock actualChampionName={actualChampion} header={"Guess todays League of Legends champion!"} guessesCounter={guessesCounter} />
+            {!!guesses ? <CluesBlock actualChampionName={actualChampion} header={"Guess todays League of Legends champion!"} guessesCounter={guessesCounter} didWin={didWin} />
                 : <TextBlock header="Guess todays League of Legends champion!" showButton={false} text="Type any champion to begin." />}
 
             <div className="submit-container">
@@ -187,7 +189,7 @@ function SearchBar() {
                                         height={38}
                                         style={{margin: "10px"}}
                                         src={ isSpecialChampionName(champ.name) ? `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${specialChampionNewUrl(champ.name)}.png`
-                                            : `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png` }
+                                            : `https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png` }
                                     />
                                     {champ.name}
                                 </div>
