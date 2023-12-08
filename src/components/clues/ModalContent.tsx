@@ -6,6 +6,7 @@ export default function ModalContent() {
     return (
         <>
             <div style={{ lineHeight: '1.6' }}>
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
                 <p>Guess today's champion from Riot's game "League of Legends".</p>
 
                 <h2 style={{ color: '#555' }}>Classic Mode</h2>

@@ -152,6 +152,7 @@ function SearchBar() {
     }, []);
 
     const isMobile = () => {
+        if (typeof window === 'undefined') return;
         if (window.innerWidth <= 1440)
         {
             return "120%";

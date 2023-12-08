@@ -4,7 +4,6 @@
 @tailwind utilities;
 
 * {
-  overflow-x: hidden;  /*Find better solution*/
   font-family: 'Friz Quadrata Std', sans-serif;
   color: aliceblue;
 }
