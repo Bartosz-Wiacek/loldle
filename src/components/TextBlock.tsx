@@ -6,23 +6,25 @@ type TextBlockProps = {
     text?: string;
     showButton: boolean;
     children?: React.ReactNode;
+    onClick?: () => void;
+    cssStyle?: React.CSSProperties;
 }
 
-export function TextBlock({header, text, showButton, children}: TextBlockProps){
+export function TextBlock({header, text, showButton, children, onClick, cssStyle}: TextBlockProps){
     const [show, setShow] = useState(true);
 
+    if (!show) return null;
+
     return (
-        <>
-            {show ? <div className="text-block-container" >
-                {(showButton && <button onClick={() => setShow(false)} className={"exitButton"}>X</button>)}
-                <div className="header-block">
-                    <h1>{header}</h1>
-                    <h2>{text}</h2>
-                    {children}
+            <div style={cssStyle} onClick={onClick}>
+                <div className="text-block-container" >
+                    {(showButton && <button onClick={() => setShow(false)} className={"exitButton"}>X</button>)}
+                    <div className="header-block">
+                        <h1>{header}</h1>
+                        <h2>{text}</h2>
+                        {children}
+                    </div>
                 </div>
-            </div> : null}
-
-        </>
-
+            </div>
     );
 }

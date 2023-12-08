@@ -6,6 +6,7 @@ import GuessesTable from "@/components/GuessesTable";
 import Image from "next/image";
 import {TextBlock} from "@/components/TextBlock";
 import {CluesBlock} from "@/components/clues/CluesBlock";
+import Modal from "@/components/clues/Modal";
 
 interface Champion {
     name: string;
@@ -19,6 +20,8 @@ function SearchBar() {
     const [isDisabled, setIsDisabled] = useState<boolean>(false);
     const [dataCopy, setDataCopy] = useState(Array.from(Object.values(data)));
     const [guessesCounter, setGuessesCounter] = useState<number>(0);
+    const [didWin, setDidWin] = useState<boolean>(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
@@ -51,6 +54,7 @@ function SearchBar() {
             }
             setIsDisabled(true);
         }, 3250);
+        setDidWin(true);
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -147,13 +151,27 @@ function SearchBar() {
         setActualChampion(data[Math.floor(Math.random() * data.length)].name);
     }, []);
 
+    const isMobile = () => {
+        if (typeof window === 'undefined') return;
+        if (window.innerWidth <= 1440)
+        {
+            return "120%";
+        }
+        return "200%"
+    }
+
     return (
         <div className="container">
             <div id="emoji-container"></div>
             <div className="logo">
                 <img src="https://loldle.net/img/Logo.f04e5476.webp" alt="Loldle" />
             </div>
-            {!!guesses ? <CluesBlock actualChampionName={actualChampion} header={"Guess todays League of Legends champion!"} guessesCounter={guessesCounter} />
+            <div className="question" >
+                <img className={"question-icon"} src={"./question-icon.webp"} alt={"How to play?"} onClick={() => setShowModal(!showModal)} />
+                <Modal modal={showModal} toggleModal={() => setShowModal(!showModal)}
+                       cssStyle={{width: isMobile(), top: "50%", right: "50%", transform: "translate(50%,-50%)", position: "absolute"}}/>
+            </div>
+            {!!guesses ? <CluesBlock actualChampionName={actualChampion} header={"Guess todays League of Legends champion!"} guessesCounter={guessesCounter} didWin={didWin} />
                 : <TextBlock header="Guess todays League of Legends champion!" showButton={false} text="Type any champion to begin." />}
 
             <div className="submit-container">
@@ -187,7 +205,7 @@ function SearchBar() {
                                         height={38}
                                         style={{margin: "10px"}}
                                         src={ isSpecialChampionName(champ.name) ? `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${specialChampionNewUrl(champ.name)}.png`
-                                            : `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png` }
+                                            : `https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${champ.name.replace(/[^a-zA-Z0-9]/g, '')}.png` }
                                     />
                                     {champ.name}
                                 </div>

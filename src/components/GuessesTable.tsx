@@ -2,7 +2,6 @@ import React, {CSSProperties, useEffect, useMemo, useRef, useState} from "react"
 import data from '../../champ-data.json';
 import './guessTable.css'
 import {TextBlock} from "@/components/TextBlock";
-import { motion } from "framer-motion"
 import Image from "next/image";
 
 interface ActualChampion {
@@ -141,8 +140,8 @@ function GuessesTable({ guess, extraProps }: { guess: string; extraProps: Actual
                                     <div className={"champ-image"}>
                                         <Image
                                             alt={champion.name}
-                                            src={ isSpecialChampionName(champion.name) ? `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${specialChampionNewUrl(champion.name)}.png`
-                                                : `https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png` }
+                                            src={ isSpecialChampionName(champion.name) ? `https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${specialChampionNewUrl(champion.name)}.png`
+                                                : `https://ddragon.leagueoflegends.com/cdn/13.24.1/img/champion/${champion.name.replace(/[^a-zA-Z0-9]/g, '')}.png` }
                                             width={67} // Set the width as per your CSS
                                             height={67} // Height should be the same as width for a square aspect ratio, adjust if necessary
                                             style={{

@@ -11,12 +11,13 @@ type QuotesData = {
 };
 
 
-export function CluesBlock({actualChampionName, header, guessesCounter}: {actualChampionName: string, header: string, guessesCounter: number}){
+export function CluesBlock({actualChampionName, header, guessesCounter, didWin}: {actualChampionName: string, header: string, guessesCounter: number, didWin: boolean}){
     const quotesData: QuotesData = rawQuotesData as QuotesData;
 
     const [showQuote, setShowQuote] = useState(false);
     const [showSplash, setShowSplash] = useState(false);
     const [scale, setScale] = useState(4.8);
+    const [guessCounterInternal, setGuessCounterInternal] = useState<number>(guessesCounter);
 
     const transformOriginProps = useMemo(() => {
         const allTransformOriginProps = ["top left", "top center", "top right", "center left", "center center", "center right", "bottom left", "bottom center", "bottom right"];
@@ -41,8 +42,14 @@ export function CluesBlock({actualChampionName, header, guessesCounter}: {actual
         if (scale > 1) {
             setScale(scale - 0.2);
         }
+        setGuessCounterInternal(guessesCounter)
+        if (didWin) {
+            setTimeout(() => {
+                setGuessCounterInternal(10);
+                setScale(1);
+            }, 3250);
+        }
     }, [guessesCounter]);
-
 
     return (
         <>
@@ -50,7 +57,7 @@ export function CluesBlock({actualChampionName, header, guessesCounter}: {actual
                 <div className="clues-block">
                     <CluesElement
                         numberToClue={3}
-                        guessesCounter={guessesCounter}
+                        guessesCounter={guessCounterInternal}
                         imageName={'quotes-icon'}
                         imageAlt={'quotes-icon'}
                         title={'Quote Clue'}
@@ -63,7 +70,7 @@ export function CluesBlock({actualChampionName, header, guessesCounter}: {actual
                     />
                     <CluesElement
                         numberToClue={6}
-                        guessesCounter={guessesCounter}
+                        guessesCounter={guessCounterInternal}
                         imageName={'splash-icon'}
                         imageAlt={'splash-icon'}
                         title={'Splash Clue'}
