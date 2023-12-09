@@ -16,9 +16,9 @@ export function TextBlock({header, text, showButton, children, onClick, cssStyle
     if (!show) return null;
 
     return (
-            <div style={cssStyle} onClick={onClick}>
+            <div style={cssStyle}>
                 <div className="text-block-container" >
-                    {(showButton && <button onClick={() => setShow(false)} className={"exitButton"}>X</button>)}
+                    {(showButton && <div onClick={onClick}><button onClick={() => setShow(false)} className={"exitButton"}>X</button></div>)}
                     <div className="header-block">
                         <h1>{header}</h1>
                         <h2>{text}</h2>

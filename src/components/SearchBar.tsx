@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import data from '../../champ-data.json';
 import './searchBar.css';
 import GuessesTable from "@/components/GuessesTable";
@@ -22,6 +22,8 @@ function SearchBar() {
     const [guessesCounter, setGuessesCounter] = useState<number>(0);
     const [didWin, setDidWin] = useState<boolean>(false);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [winningBlock, setWinningBlock] = useState<string>("none");
+    const div = useRef<HTMLDivElement>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = e.target.value;
@@ -52,9 +54,14 @@ function SearchBar() {
             for (let i = 0; i < 70; i++) {
                 createEmoji();
             }
+            setWinningBlock("block");
             setIsDisabled(true);
         }, 3250);
         setDidWin(true);
+        setTimeout(() => {
+            console.log("should go down")
+            div.current?.scrollIntoView({ behavior: 'smooth' });
+        }, 3500);
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -216,7 +223,17 @@ function SearchBar() {
             </div>
 
             <GuessesTable guess={guesses} extraProps={{ actualChampion: actualChampion }} />
-
+            {didWin ?
+                <div style={{display: winningBlock}} ref={div}>
+                    <TextBlock header={"gg ez"} showButton={false}>
+                        <div style={{flexDirection: "column"}}>
+                            <p>You guessed {guesses} in {guessesCounter} guesses!</p>
+                        <Image
+                            src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${specialChampionNewUrl(guesses).replace(/[^a-zA-Z0-9]/g, '')}_0.jpg`}
+                            alt={"splash-art"} width={500} height={350} style={{display: "inline-flex"}}/>
+                        </div>
+                    </TextBlock>
+                </div>: null}
         </div>
     );
 }

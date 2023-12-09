@@ -85,7 +85,7 @@ export function CluesBlock({actualChampionName, header, guessesCounter, didWin}:
                 {showQuote ? <p className={"clues-text"}>{'"' + randomQuote + '"'}</p> : null}
                 {showSplash ?<div style={{display: "flex", justifyContent: "center", overflowY: "hidden", borderRadius: "5px", marginTop: "5px"}}>
                     <Image
-                    src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${specialChampionNewUrl(actualChampionName)}_${randomInteger}.jpg`}
+                    src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${specialChampionNewUrl(actualChampionName).replace(/[^a-zA-Z0-9]/g, '')}_${randomInteger}.jpg`}
                     alt={"splash-art"} width={500} height={350} style={{transform: `scale(${scale})`, transformOrigin: transformOriginProps}} />
                 </div>  : null}
             </TextBlock>
